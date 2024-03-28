@@ -10,9 +10,6 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" />
 <link rel="stylesheet" href="{{ asset('public/vendor/font-awesome/css/all.min.css') }}" />
 @yield('css')
-<!-- Scripts -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
-@yield('javascript')
 </head>
 <body>
 <div class="container-fluid">
@@ -33,23 +30,46 @@
 </a>
 <ul class="dropdown-menu">
 <li>
-<a class="dropdown-item" href="{{ route('chude') }}">
+<a class="dropdown-item" href="{{ route('admin.chude') }}">
 <i class="fa-light fa-fw fa-list-tree"></i> Chủ đề
 </a>
 </li>
 <li><hr class="dropdown-divider"></li>
 <li>
-<a class="dropdown-item" href="{{ route('baiviet') }}">
+<a class="dropdown-item" href="{{ route('admin.baiviet') }}">
 <i class="fa-light fa-fw fa-newspaper"></i> Bài viết
 </a>
 </li>
 <li>
-<a class="dropdown-item" href="{{ route('binhluanbaiviet') }}">
+<a class="dropdown-item" href="{{ route('admin.binhluanbaiviet') }}">
 <i class="fa-light fa-fw fa-comments"></i> Bình luận bài viết
 </a>
 </li>
 </ul>
 </li>
+<!-- Thêm các liên kết mới -->
+<li class="nav-item dropdown">
+<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+<i class="fa-light fa-fw fa-newspaper"></i> Quản lý Tour du lịch
+</a>
+<ul class="dropdown-menu">
+<li>
+<a class="dropdown-item" href="{{ route('dattour') }}">
+<i class="fa-light fa-fw fa-calendar-check"></i> Đặt tour
+</a>
+</li>
+<li>
+<a class="dropdown-item" href="{{ route('doitac') }}">
+<i class="fa-light fa-fw fa-handshake"></i> Đối tác
+</a>
+</li>
+<li>
+<a class="dropdown-item" href="{{ route('diadiem') }}">
+<i class="fa-light fa-fw fa-map-marker-alt"></i> Điểm đến
+</a>
+</li>
+</li>
+</ul>
 <li class="nav-item">
 <a class="nav-link" href="{{ route('nguoidung') }}"><i class="fa-light fa-fw fa-users"></i> Tài khoản</a>
 </li>
@@ -95,5 +115,8 @@
 <hr class="shadow-sm" />
 <footer>Bản quyền &copy; {{ date('Y') }} bởi {{ config('app.name', 'Laravel') }}.</footer>
 </div>
+<!-- Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+@yield('javascript')
 </body>
 </html>
