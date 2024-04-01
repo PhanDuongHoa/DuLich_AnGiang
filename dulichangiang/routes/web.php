@@ -2,11 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\LoaiSanPhamController;
-use App\Http\Controllers\HangSanXuatController;
-use App\Http\Controllers\SanPhamController;
-use App\Http\Controllers\TinhTrangController;
-use App\Http\Controllers\DonHangController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\KhachHangController;
 use App\Http\Controllers\AdminController;
@@ -42,13 +37,16 @@ Route::name('frontend.')->group(function() {
     Route::get('/bai-viet', [HomeController::class, 'getBaiViet'])->name('baiviet');
     Route::get('/bai-viet/{tenchude_slug}', [HomeController::class, 'getBaiViet'])->name('baiviet.chude');
     Route::get('/bai-viet/{tenchude_slug}/{tieude_slug}', [HomeController::class, 'getBaiViet_ChiTiet'])->name('baiviet.chitiet');
-    
+    Route::get('/baiviet/timkiem', [HomeController::class, 'getTimkiem'])->name('baiviet.timkiem');
+    Route::get('/binhluanbaiviet/them', [BinhLuanBaiVietController::class, 'getThem'])->name('binhluanbaiviet.them');
+    Route::post('/binhluanbaiviet/them', [BinhLuanBaiVietController::class, 'postThem'])->name('binhluanbaiviet.them');
     
     // Tuyển dụng
     Route::get('/tuyen-dung', [HomeController::class, 'getTuyenDung'])->name('tuyendung');
     
     // Liên hệ
     Route::get('/lien-he', [HomeController::class, 'getLienHe'])->name('lienhe');
+    Route::get('/gioi-thieu', [HomeController::class, 'getGioiThieu'])->name('gioithieu');
 });
 
 // Trang khách hàng
@@ -103,8 +101,6 @@ Route::prefix('admin')->name('admin.')->group(function() {
     
     // Quản lý Bình luận bài viết
     Route::get('/binhluanbaiviet', [BinhLuanBaiVietController::class, 'getDanhSach'])->name('binhluanbaiviet');
-    Route::get('/binhluanbaiviet/them', [BinhLuanBaiVietController::class, 'getThem'])->name('binhluanbaiviet.them');
-    Route::post('/binhluanbaiviet/them', [BinhLuanBaiVietController::class, 'postThem'])->name('binhluanbaiviet.them');
     Route::get('/binhluanbaiviet/sua/{id}', [BinhLuanBaiVietController::class, 'getSua'])->name('binhluanbaiviet.sua');
     Route::post('/binhluanbaiviet/sua/{id}', [BinhLuanBaiVietController::class, 'postSua'])->name('binhluanbaiviet.sua');
     Route::get('/binhluanbaiviet/xoa/{id}', [BinhLuanBaiVietController::class, 'getXoa'])->name('binhluanbaiviet.xoa');

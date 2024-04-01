@@ -4,9 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\BaiViet;
 use App\Models\BinhLuanBaiViet;
-use App\Models\ChuDe;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Facades\Excel;
 
 class BinhLuanBaiVietController extends Controller
 {
@@ -17,40 +18,43 @@ class BinhLuanBaiVietController extends Controller
     }
     public function getThem()
     {
-        
         $baiviet = BaiViet::orderBy('created_at', 'desc')->get();
-        return view('admin.binhluanbaiviet.them', compact('baiviet'));
+        $user = User::all();
+        return view('admin.binhluanbaiviet.them', compact('user','baiviet'));
     }
     public function postThem(Request $request)
     {
         // Kiểm tra
         $request->validate([
-            'baiviet_id' => ['required', 'integer'],
-            'noidungbinhluan' => ['required', 'string', 'min:20'],
+            'baiviet_id' => ['required'],
+            'user_id' => ['required'],
         ]);
         $orm = new BinhLuanBaiViet();
         $orm->baiviet_id = $request->baiviet_id;
-        $orm->user_id = Auth::user()->id;
+         /* $orm->user_id = Auth::user()->id; */
+        $orm->user_id = $request->user_id; 
         $orm->noidungbinhluan = $request->noidungbinhluan;
         $orm->save();
         // Sau khi thêm thành công thì tự động chuyển về trang danh sách
-        return redirect()->route('admin.binhluanbaiviet');
+        return redirect()->back();
     }
     public function getSua($id)
     {
         $baiviet = BaiViet::orderBy('created_at', 'desc')->get();
         $binhluanbaiviet = BinhLuanBaiViet::find($id);
-        return view('admin.binhluanbaiviet.sua', compact('baiviet', 'binhluanbaiviet'));
+        $user = User::all();
+        return view('admin.binhluanbaiviet.sua', compact('baiviet', 'binhluanbaiviet','user'));
     }
     public function postSua(Request $request, $id)
     {
         // Kiểm tra
         $request->validate([
-            'baiviet_id' => ['required', 'integer'],
-            'noidungbinhluan' => ['required', 'string', 'min:20'],
+            'baiviet_id' => ['required'],
+            'user_id'=>['required']
         ]);
         $orm = BinhLuanBaiViet::find($id);
         $orm->baiviet_id = $request->baiviet_id;
+        $orm->user_id = $request->user_id;
         $orm->noidungbinhluan = $request->noidungbinhluan;
         $orm->save();
         // Sau khi sửa thành công thì tự động chuyển về trang danh sách
@@ -67,6 +71,7 @@ class BinhLuanBaiVietController extends Controller
     {
         $orm = BinhLuanBaiViet::find($id);
         $orm->kiemduyet = 1 - $orm->kiemduyet;
+
         $orm->save();
         return redirect()->route('admin.binhluanbaiviet');
     }

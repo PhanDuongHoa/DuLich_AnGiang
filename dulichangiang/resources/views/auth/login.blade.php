@@ -11,6 +11,14 @@
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
 
+                        <div class="mb-3">
+                            <label class="form-label" for="email">Tài khoản</label>
+                            <input type="text" class="form-control {{ ($errors->has('email') || $errors->has('username')) ? 'is-invalid' : '' }}" id="email" name="email" value="{{ old('email') }}" placeholder="Email, Tên đăng nhập hoặc Điện thoại" required />
+                            @if($errors->has('email') || $errors->has('username'))
+                                <div class="invalid-feedback"><strong>{{ empty($errors->first('email')) ? $errors->first('username') : $errors->first('email') }}</strong></div>
+                            @endif
+                        </div>
+
                         <div class="row mb-3">
                             <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
 

@@ -4,12 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\ChuDe;
 use App\Models\BaiViet;
+use App\Models\BinhLuanBaiViet;
 use App\Models\User;
-use App\Models\DonHang;
-use App\Models\LoaiSanPham;
-use App\Models\SanPham;
-use App\Models\DonHang_ChiTiet;
-use App\Mail\DatHangEmail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
@@ -25,6 +21,48 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
+
+    public function getGoogleLogin()
+    {
+        return Socialite::driver('google')->redirect();
+    }
+
+    public function getGoogleCallback()
+    {
+        try
+        {
+            $user = Socialite::driver('google')
+            ->setHttpClient(new \GuzzleHttp\Client(['verify' => false]))
+            ->stateless()
+            ->user();
+        }
+        catch(Exception $e)
+        {
+            return redirect()->route('user.dangnhap')->with('warning', 'Lỗi xác thực. Xin vui lòng thử lại!');
+        }
+
+        $existingUser = User::where('email', $user->email)->first();
+        if($existingUser)
+        {
+            // Nếu người dùng đã tồn tại thì đăng nhập
+            Auth::login($existingUser, true);
+            return redirect()->route('user.home');
+        }
+        else
+        {
+            // Nếu chưa tồn tại người dùng thì thêm mới
+            $newUser = User::create([
+                'name' => $user->name,
+                'email' => $user->email,
+                'username' => Str::before($user->email, '@'),
+                'password' => Hash::make('1234'), // Gán mật khẩu tự do
+            ]);// Sau đó đăng nhập
+
+            Auth::login($newUser, true);
+            return redirect()->route('user.home');
+        }
+    }
+
     public function getHome()
     {
         // Bổ sung code tại đây
@@ -77,14 +115,17 @@ class HomeController extends Controller
             $orm->save();
             session()->put($daxem, 1);
         }
+        
+        $binhluanbaiviet = BinhLuanBaiViet::where('baiviet_id', $baiviet_id)->get();
+        
         $baivietcungchuyemuc = BaiViet::where('kichhoat', 1)
-            ->where('kiemduyet', 1)
-            ->where('chude_id', $baiviet->chude_id)
-            ->where('id', '!=', $baiviet_id)
-            ->orderBy('created_at', 'desc')
-            ->take(4)->get();
+        ->where('kiemduyet', 1)
+        ->where('chude_id', $baiviet->chude_id)
+        ->where('id', '!=', $baiviet_id)
+        ->orderBy('created_at', 'desc')
+        ->take(4)->get();
 
-        return view('frontend.baiviet_chitiet', compact('baiviet', 'baivietcungchuyemuc'));
+        return view('frontend.baiviet_chitiet', compact('baiviet', 'baivietcungchuyemuc', 'binhluanbaiviet'));
     }
 
     public function getTuyenDung()
@@ -108,4 +149,19 @@ class HomeController extends Controller
     {
         return view('user.dangnhap');
     } 
+
+    public function getTimkiem(Request $request)
+    {
+        $searchTerm = $request->query('tieude');
+        $chude = ChuDe::all();
+
+        $baiviet = BaiViet::where('tieude', 'like', '%' . $searchTerm . '%')->get();
+        var_dump($baiviet);
+        return view('frontend.timkiem', compact('baiviet', 'chude'));
+    }
+
+    public function getGioiThieu()
+    {
+        return view('frontend.gioithieu');
+    }
 }

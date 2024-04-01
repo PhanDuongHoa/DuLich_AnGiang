@@ -19,18 +19,17 @@
 	<title>@yield('title', 'Trang chủ') - {{ config('app.name', 'Laravel') }}</title>
 	
 	<!-- Favicon and Touch Icons -->
-    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('public/img/apple-touch-icon.png') }}" />
-    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('public/img/favicon-32x32.png') }}" />
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('public/img/favicon-16x16.png') }}" />
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('public/img/logo-180.png') }}" />
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('public/img/logo-32x32.png') }}" />
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('public/img/logo-32x32.png') }}" />
     
     <!-- CSS -->
-	<link rel="stylesheet" href="https://unpkg.com/bootstrap@5.3.2/dist/css/bootstrap.min.css">
     <link rel="stylesheet" media="screen" href="{{ asset('public/vendor/simplebar/simplebar.min.css') }}" />
-    <link rel="stylesheet" media="screen" href="{{ asset('public/vendor/tiny-slider/tiny-slider.css') }}" />
-    <link rel="stylesheet" media="screen" href="{{ asset('public/vendor/nouislider/nouislider.min.css') }}" />
-    <link rel="stylesheet" media="screen" href="{{ asset('public/vendor/drift-zoom/drift-basic.min.css') }}" />
-    <link rel="stylesheet" media="screen" href="{{ asset('public/vendor/lightgallery/lightgallery-bundle.min.css') }}" />
-    <link rel="stylesheet" media="screen" href="{{ asset('public/css/theme.min.css') }}" />
+	<link rel="stylesheet" media="screen" href="{{ asset('public/vendor/tiny-slider/tiny-slider.css') }}" />
+	<link rel="stylesheet" media="screen" href="{{ asset('public/vendor/nouislider/nouislider.min.css') }}" />
+	<link rel="stylesheet" media="screen" href="{{ asset('public/vendor/drift-zoom/drift-basic.min.css') }}" />
+	<link rel="stylesheet" media="screen" href="{{ asset('public/vendor/lightgallery/lightgallery-bundle.min.css') }}" />
+	<link rel="stylesheet" media="screen" href="{{ asset('public/css/theme.min.css') }}" />
 </head>
 
 <body class="handheld-toolbar-enabled">
@@ -45,10 +44,12 @@
 						<a class="navbar-brand d-sm-none flex-shrink-0 me-2" href="{{ route('frontend.home') }}">
 							<img src="{{ asset('public/img/logo-icon.png') }}" width="74" />
 						</a>
-						<div class="input-group d-none d-lg-flex mx-4">
-							<input class="form-control rounded-end pe-5" type="text" placeholder="Tìm kiếm" />
-							<i class="ci-search position-absolute top-50 end-0 translate-middle-y text-muted fs-base me-3"></i>
-						</div>
+						<form action="{{ route('frontend.baiviet.timkiem') }}" method="GET" class="input-group d-none d-lg-flex mx-4">
+							@csrf
+							<input name="tieude" class="form-control rounded-end pe-5" type="text" placeholder="Tìm kiếm" />
+							<button type="submit" class="btn btn-primary"><i class="ci-search ci-dark position-absolute top-50 end-0 translate-middle-y text-muted fs-base me-3"></i></button>
+						</form>
+
 						<div class="navbar-toolbar d-flex flex-shrink-0 align-items-center">
 							<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
 								<span class="navbar-toggler-icon"></span>
@@ -93,8 +94,26 @@
 										<li><a class="dropdown-item" href="{{ route('frontend.baiviet.chude', ['tenchude_slug' => 'am-thuc']) }}">Ẩm thực</a></li>
 									</ul>
 								</li>
+								<li class="nav-item dropdown">
+									<a class="nav-link dropdown-toggle" href="{{ route('frontend.baiviet') }}" data-bs-toggle="dropdown" data-bs-auto-close="outside"><i class="ci-loudspeaker me-2"></i>Khu vực</a>
+									<ul class="dropdown-menu">
+									<li><a class="dropdown-item" href="{{ route('frontend.baiviet.chude', ['tenchude_slug' => 'long-xuyen']) }}">Thành phố Long Xuyên</a></li>
+										<li><a class="dropdown-item" href="{{ route('frontend.baiviet.chude', ['tenchude_slug' => 'chau-doc']) }}">Thành phố Châu Đốc</a></li>
+										<li><a class="dropdown-item" href="{{ route('frontend.baiviet.chude', ['tenchude_slug' => 'tinh-bien']) }}">Tịnh Biên</a></li>
+										<li><a class="dropdown-item" href="{{ route('frontend.baiviet.chude', ['tenchude_slug' => 'tri-ton']) }}">Tri Tôn</a></li>
+										<li><a class="dropdown-item" href="{{ route('frontend.baiviet.chude', ['tenchude_slug' => 'cho-moi']) }}">Chợ Mới</a></li>
+										<li><a class="dropdown-item" href="{{ route('frontend.baiviet.chude', ['tenchude_slug' => 'chau-thanh']) }}">Châu Thành</a></li>
+										<li><a class="dropdown-item" href="{{ route('frontend.baiviet.chude', ['tenchude_slug' => 'chau-phu']) }}">Châu Phú</a></li>
+										<li><a class="dropdown-item" href="{{ route('frontend.baiviet.chude', ['tenchude_slug' => 'an-phu']) }}">An Phú</a></li>
+										<li><a class="dropdown-item" href="{{ route('frontend.baiviet.chude', ['tenchude_slug' => 'phu-tan']) }}">Phú Tân</a></li>
+										<li><a class="dropdown-item" href="{{ route('frontend.baiviet.chude', ['tenchude_slug' => 'tan-chau']) }}">Thị xã Tân Châu</a></li>
+									</ul>
+								</li>
 								<li class="nav-item">
 									<a class="nav-link" href="{{ route('frontend.lienhe') }}"><i class="ci-support me-2"></i>Liên hệ</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" href="{{ route('frontend.gioithieu') }}"><i class="ci-support me-2"></i>Giới thiệu</a>
 								</li>
 							</ul>
 						</div>
