@@ -27,7 +27,7 @@
 				<div class="d-flex flex-wrap justify-content-between align-items-center pb-4 mt-n1">
 					<div class="d-flex align-items-center fs-sm mb-2">
 						<a class="blog-entry-meta-link" href="#user">
-						<div class="blog-entry-author-ava"><img src="{{ asset('public/img/03.jpg') }}" /></div>
+							<div class="blog-entry-author-ava"><img src="{{ asset('public/img/03.jpg') }}" /></div>
 							{{ $baiviet->User->name }}
 						</a>
 							<span class="blog-entry-meta-divider"></span>
@@ -119,7 +119,7 @@
 				<div class="tns-carousel-inner" data-carousel-options="{&quot;items&quot;: 2, &quot;controls&quot;: false, &quot;autoHeight&quot;: true, &quot;responsive&quot;: {&quot;0&quot;:{&quot;items&quot;:1},&quot;500&quot;:{&quot;items&quot;:2, &quot;gutter&quot;: 20},&quot;900&quot;:{&quot;items&quot;:3, &quot;gutter&quot;: 20}, &quot;1100&quot;:{&quot;items&quot;:3, &quot;gutter&quot;: 30}}}">
 					@foreach($baivietcungchuyemuc as $value)
 						<article>
-							<a class="blog-entry-thumb mb-3" href="{{ route('frontend.baiviet.chitiet', ['tenchude_slug' => $value->ChuDe->tenchude_slug, 'tieude_slug' => $value->tieude_slug . '-' . $value->id . '.html']) }}">
+							<a class="blog-entry-thumb mb-3" href="{{ route('frontend.baiviet.chitiet', ['tendiadiem_slug' => $value->DiaDiem->tendiadiem_slug, 'tenchude_slug' => $value->ChuDe->tenchude_slug, 'tieude_slug' => $value->tieude_slug . '-' . $value->id . '.html']) }}">
 								<img src="{{ LayHinhDauTien($value->noidung) }}" />
 							</a>
 							<div class="d-flex align-items-center fs-sm mb-2">
@@ -128,7 +128,7 @@
 								<a class="blog-entry-meta-link" href="#date">{{ Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $value->created_at)->format('d/m/Y') }}</a>
 							</div>
 							<h3 class="h6 blog-entry-title">
-								<a href="{{ route('frontend.baiviet.chitiet', ['tenchude_slug' => $value->ChuDe->tenchude_slug, 'tieude_slug' => $value->tieude_slug . '-' . $value->id . '.html']) }}">
+								<a href="{{ route('frontend.baiviet.chitiet', ['tendiadiem_slug' => $value->DiaDiem->tendiadiem_slug, 'tenchude_slug' => $value->ChuDe->tenchude_slug, 'tieude_slug' => $value->tieude_slug . '-' . $value->id . '.html']) }}">
 									{{ $value->tieude }}
 								</a>
 							</h3>

@@ -14,6 +14,10 @@ class BaiViet extends Model
     {
         return $this->belongsTo(ChuDe::class, 'chude_id', 'id');
     }
+    public function DiaDiem(): BelongsTo
+    {
+        return $this->belongsTo(DiaDiem::class, 'diadiem_id', 'id');
+    }
     public function User(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id', 'id');

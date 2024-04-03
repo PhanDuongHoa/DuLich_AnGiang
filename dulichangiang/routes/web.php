@@ -8,6 +8,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ChuDeController;
 use App\Http\Controllers\BaiVietController;
 use App\Http\Controllers\BinhLuanBaiVietController;
+use App\Http\Controllers\DiaDiemController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,13 +35,17 @@ Route::name('frontend.')->group(function() {
     Route::get('/home', [HomeController::class, 'getHome'])->name('home');
     
     // Tin tức
+    // Cập nhật tệp route web.php
     Route::get('/bai-viet', [HomeController::class, 'getBaiViet'])->name('baiviet');
-    Route::get('/bai-viet/{tenchude_slug}', [HomeController::class, 'getBaiViet'])->name('baiviet.chude');
-    Route::get('/bai-viet/{tenchude_slug}/{tieude_slug}', [HomeController::class, 'getBaiViet_ChiTiet'])->name('baiviet.chitiet');
+    Route::get('/bai-viet/chu-de/{tenchude_slug}', [HomeController::class, 'getBaiVietChuDe'])->name('baiviet.chude');
+    Route::get('/bai-viet/dia-diem/{tendiadiem_slug}', [HomeController::class, 'getBaiVietDiaDiem'])->name('baiviet.diadiem');
+    Route::get('/bai-viet/{tendiadiem_slug}/{tenchude_slug}/{tieude_slug}', [HomeController::class, 'getBaiViet_ChiTiet'])->name('baiviet.chitiet');
+
     Route::get('/baiviet/timkiem', [HomeController::class, 'getTimkiem'])->name('baiviet.timkiem');
     Route::get('/binhluanbaiviet/them', [BinhLuanBaiVietController::class, 'getThem'])->name('binhluanbaiviet.them');
     Route::post('/binhluanbaiviet/them', [BinhLuanBaiVietController::class, 'postThem'])->name('binhluanbaiviet.them');
-    
+
+
     // Tuyển dụng
     Route::get('/tuyen-dung', [HomeController::class, 'getTuyenDung'])->name('tuyendung');
     
@@ -88,6 +93,14 @@ Route::prefix('admin')->name('admin.')->group(function() {
     Route::get('/chude/sua/{id}', [ChuDeController::class, 'getSua'])->name('chude.sua');
     Route::post('/chude/sua/{id}', [ChuDeController::class, 'postSua'])->name('chude.sua');
     Route::get('/chude/xoa/{id}', [ChuDeController::class, 'getXoa'])->name('chude.xoa');
+
+    // Quản lý Địa điểm
+    Route::get('/diadiem', [DiaDiemController::class, 'getDanhSach'])->name('diadiem');
+    Route::get('/diadiem/them', [DiaDiemController::class, 'getThem'])->name('diadiem.them');
+    Route::post('/diadiem/them', [DiaDiemController::class, 'postThem'])->name('diadiem.them');
+    Route::get('/diadiem/sua/{id}', [DiaDiemController::class, 'getSua'])->name('diadiem.sua');
+    Route::post('/diadiem/sua/{id}', [DiaDiemController::class, 'postSua'])->name('diadiem.sua');
+    Route::get('/diadiem/xoa/{id}', [DiaDiemController::class, 'getXoa'])->name('diadiem.xoa');
     
     // Quản lý Bài viết
     Route::get('/baiviet', [BaiVietController::class, 'getDanhSach'])->name('baiviet');

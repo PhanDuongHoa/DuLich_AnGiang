@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ChuDe;
 use App\Models\BaiViet;
+use App\Models\DiaDiem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
@@ -18,17 +19,20 @@ class BaiVietController extends Controller
     public function getThem()
     {
         $chude = ChuDe::all();
-        return view('admin.baiviet.them', compact('chude'));
+        $diadiem = DiaDiem::all();
+        return view('admin.baiviet.them', compact('chude', 'diadiem'));
     }
     public function postThem(Request $request)
     {
         // Kiểm tra
         $request->validate([
             'chude_id' => ['required', 'integer'],
+            'diadiem_id' => ['required', 'integer'],
             'tieude' => ['required', 'string', 'max:300', 'unique:baiviet'],
             'noidung' => ['required', 'string'],
             ]);$orm = new BaiViet();
             $orm->chude_id = $request->chude_id;
+            $orm->diadiem_id = $request->diadiem_id;
             $orm->user_id = Auth::user()->id;
             $orm->tieude = $request->tieude;
             $orm->tieude_slug = Str::slug($request->tieude, '-');

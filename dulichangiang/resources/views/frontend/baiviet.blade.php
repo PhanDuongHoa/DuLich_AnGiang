@@ -39,17 +39,18 @@
 @foreach($baiviet as $value)
 <article class="masonry-grid-item">
 <div class="card">
-<a class="blog-entry-thumb" href="{{ route('frontend.baiviet.chitiet', ['tenchude_slug' => $value->ChuDe->tenchude_slug, 'tieude_slug' => $value->tieude_slug . '-' . $value->id . '.html']) }}">
+<a class="blog-entry-thumb" href="{{ route('frontend.baiviet.chitiet', ['tendiadiem_slug' => $value->DiaDiem->tendiadiem_slug, 'tenchude_slug' => $value->ChuDe->tenchude_slug, 'tieude_slug' => $value->tieude_slug . '-' . $value->id . '.html']) }}">
 <img class="card-img-top" src="{{ LayHinhDauTien($value->noidung) }}" />
 </a>
 <div class="card-body">
 <h2 class="h6 blog-entry-title">
-<a href="{{ route('frontend.baiviet.chitiet', ['tenchude_slug' => $value->ChuDe->tenchude_slug, 'tieude_slug' => $value->tieude_slug . '-' . $value->id . '.html']) }}">
+<a href="{{ route('frontend.baiviet.chitiet', ['tendiadiem_slug' => $value->DiaDiem->tendiadiem_slug, 'tenchude_slug' => $value->ChuDe->tenchude_slug, 'tieude_slug' => $value->tieude_slug . '-' . $value->id . '.html']) }}">
 {{ $value->tieude }}
 </a>
 </h2>
 <p class="fs-sm" style="text-align:justify">{{ $value->tomtat }}</p>
 <a class="btn-tag me-2 mb-2" href="{{ route('frontend.baiviet.chude', ['tenchude_slug' => $value->ChuDe->tenchude_slug]) }}">{{ $value->ChuDe->tenchude }}</a>
+<a class="btn-tag me-2 mb-2" href="{{ route('frontend.baiviet.diadiem', ['tendiadiem_slug' => $value->DiaDiem->tendiadiem_slug]) }}">{{ $value->DiaDiem->tendiadiem }}</a>
 </div>
 <div class="card-footer d-flex align-items-center fs-xs">
 <a class="blog-entry-meta-link" href="#user">

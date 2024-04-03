@@ -40,7 +40,7 @@
                     </a>
                 </div>
                 <div>
-                    <a class="d-block bg-white border py-4 py-sm-5 px-2" href="#" style="margin-right:-.0625rem;">
+                    <a class="d-block bg-white border py-4 py-sm-5 px-2" href="{{ route('frontend.baiviet.diadiem', ['tendiadiem_slug' => 'chau-doc']) }}" style="margin-right:-.0625rem;">
                         <img class="d-block mx-auto" src="{{ asset('public/img/brands/chaudoc.jpg') }}" style="width:165px;" />
                     </a>
                 </div>
@@ -95,39 +95,40 @@
         <h2 class="mx-4 mt-4 text-center">Bài viết nổi bật</h2>
         <div class="row">
         <div class="col-lg-8">
-        @foreach($baiviet as $value)
+        @foreach($baiviet->sortByDesc('created_at')->take(5) as $value)
             <article class="masonry-grid-item mx-4 mt-4 mb-4">
-            <div class="card" style="max-width:800px">
-            <a class="blog-entry-thumb" href="{{ route('frontend.baiviet.chitiet', ['tenchude_slug' => $value->ChuDe->tenchude_slug, 'tieude_slug' => $value->tieude_slug . '-' . $value->id . '.html']) }}">
-            <img class="card-img-top" src="{{ LayHinhDauTien($value->noidung) }}" style="width: 150px; height: 150px;"/>
-            </a>
-            <div class="card-body">
-            <h2 class="h6 blog-entry-title">
-            <a href="{{ route('frontend.baiviet.chitiet', ['tenchude_slug' => $value->ChuDe->tenchude_slug, 'tieude_slug' => $value->tieude_slug . '-' . $value->id . '.html']) }}">
-            {{ $value->tieude }}
-            </a>
-            </h2>
-            <p class="fs-sm" style="text-align:justify">{{ $value->tomtat }}</p>
-            <a class="btn-tag me-2 mb-2" href="{{ route('frontend.baiviet.chude', ['tenchude_slug' => $value->ChuDe->tenchude_slug]) }}">{{ $value->ChuDe->tenchude }}</a>
-            </div>
-            <div class="card-footer d-flex align-items-center fs-xs">
-            <a class="blog-entry-meta-link" href="{{ route('user.home') }}">
-            <div class="blog-entry-author-ava"><img src="{{ asset('public/img/03.jpg') }}" /></div>{{ $value->User->name }}
-            </a>
-            <div class="ms-auto text-nowrap">
-            <a class="blog-entry-meta-link text-nowrap" href="#date">{{ Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $value->created_at)->format('d/m/Y') }}</a>
-            <span class="blog-entry-meta-divider mx-2"></span>
-            <a class="blog-entry-meta-link text-nowrap" href="#view"><i class="ci-eye"></i>{{ $value->luotxem }}</a>
-            </div>
-            </div>
-            </div>
+                <div class="card" style="max-width:800px">
+                    <a class="blog-entry-thumb" href="{{ route('frontend.baiviet.chitiet', ['tendiadiem_slug' => $value->DiaDiem->tendiadiem_slug, 'tenchude_slug' => $value->ChuDe->tenchude_slug, 'tieude_slug' => $value->tieude_slug . '-' . $value->id . '.html']) }}">
+                        <img class="card-img-top" src="{{ LayHinhDauTien($value->noidung) }}" style="width: 150px; height: 150px;"/>
+                    </a>
+                    <div class="card-body">
+                        <h2 class="h6 blog-entry-title">
+                            <a href="{{ route('frontend.baiviet.chitiet', ['tendiadiem_slug' => $value->DiaDiem->tendiadiem_slug, 'tenchude_slug' => $value->ChuDe->tenchude_slug, 'tieude_slug' => $value->tieude_slug . '-' . $value->id . '.html']) }}">
+                                {{ $value->tieude }}
+                            </a>
+                        </h2>
+                        <p class="fs-sm" style="text-align:justify">{{ $value->tomtat }}</p>
+                        <a class="btn-tag me-2 mb-2" href="{{ route('frontend.baiviet.chude', ['tenchude_slug' => $value->ChuDe->tenchude_slug]) }}">{{ $value->ChuDe->tenchude }}</a>
+                        <a class="btn-tag me-2 mb-2" href="{{ route('frontend.baiviet.diadiem', ['tendiadiem_slug' => $value->DiaDiem->tendiadiem_slug]) }}">{{ $value->DiaDiem->tendiadiem }}</a>
+                    </div>
+                    <div class="card-footer d-flex align-items-center fs-xs">
+                        <a class="blog-entry-meta-link" href="{{ route('user.home') }}">
+                            <div class="blog-entry-author-ava"><img src="{{ asset('public/img/03.jpg') }}" /></div>{{ $value->User->name }}
+                        </a>
+                        <div class="ms-auto text-nowrap">
+                            <a class="blog-entry-meta-link text-nowrap" href="#date">{{ Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $value->created_at)->format('d/m/Y') }}</a>
+                            <span class="blog-entry-meta-divider mx-2"></span>
+                            <a class="blog-entry-meta-link text-nowrap" href="#view"><i class="ci-eye"></i>{{ $value->luotxem }}</a>
+                        </div>
+                    </div>
+                </div>
             </article>
         @endforeach
         </div>
         <div class="col-lg-4">
                 <div class="mb-4 mx-2 mt-4" style="border:thin solid #ccc; border-radius:10px">
                     <h4 class="text-center fw-bold mt-2">Danh mục bài viết</h4>
-                    <ul class="list-unstyled fruite-categorie border-top mx-2">
+                    <ul class="list-unstyled fruite-categorie border-top mx-4">
                         <li>
                             <div class="d-flex justify-content-between fruite-name mt-2">
                                 <a href="{{ route('frontend.baiviet.chude', ['tenchude_slug' =>'tam-linh']) }}"><i class="bi bi-newspaper"></i>Tâm linh</a>

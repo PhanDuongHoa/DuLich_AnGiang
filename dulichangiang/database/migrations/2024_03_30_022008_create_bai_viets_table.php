@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('baiviet', function (Blueprint $table) {
             $table->id();
             $table->foreignId('chude_id')->constrained('chude');
+            $table->foreignId('diadiem_id')->constrained('diadiem');
             $table->foreignId('user_id')->constrained('users');
             $table->text('tieude');
             $table->text('tieude_slug');

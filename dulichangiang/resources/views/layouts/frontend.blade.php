@@ -88,32 +88,26 @@
 							</ul>
 							<ul class="navbar-nav">
 								<li class="nav-item dropdown">
-									<a class="nav-link dropdown-toggle" href="{{ route('frontend.baiviet') }}" data-bs-toggle="dropdown" data-bs-auto-close="outside"><i class="ci-globe me-2"></i>Tin tức</a>
+									<a class="nav-link dropdown-toggle" href="{{ route('frontend.baiviet.chude', ['tenchude_slug' => 'tam-linh']) }}" data-bs-toggle="dropdown" data-bs-auto-close="outside"><i class="ci-globe me-2"></i>Tin tức</a>
 									<ul class="dropdown-menu">
 										<li><a class="dropdown-item" href="{{ route('frontend.baiviet.chude', ['tenchude_slug' => 'tam-linh']) }}">Tâm linh</a></li>
 										<li><a class="dropdown-item" href="{{ route('frontend.baiviet.chude', ['tenchude_slug' => 'am-thuc']) }}">Ẩm thực</a></li>
 									</ul>
 								</li>
 								<li class="nav-item dropdown">
-									<a class="nav-link dropdown-toggle" href="{{ route('frontend.baiviet') }}" data-bs-toggle="dropdown" data-bs-auto-close="outside"><i class="ci-loudspeaker me-2"></i>Khu vực</a>
+									<a class="nav-link dropdown-toggle" href="{{ route('frontend.baiviet.diadiem', ['tendiadiem_slug' => 'long-xuyen']) }}" data-bs-toggle="dropdown" data-bs-auto-close="outside"><i class="ci-location me-2"></i>Khu vực</a>
 									<ul class="dropdown-menu">
-									<li><a class="dropdown-item" href="{{ route('frontend.baiviet.chude', ['tenchude_slug' => 'long-xuyen']) }}">Thành phố Long Xuyên</a></li>
-										<li><a class="dropdown-item" href="{{ route('frontend.baiviet.chude', ['tenchude_slug' => 'chau-doc']) }}">Thành phố Châu Đốc</a></li>
-										<li><a class="dropdown-item" href="{{ route('frontend.baiviet.chude', ['tenchude_slug' => 'tinh-bien']) }}">Tịnh Biên</a></li>
-										<li><a class="dropdown-item" href="{{ route('frontend.baiviet.chude', ['tenchude_slug' => 'tri-ton']) }}">Tri Tôn</a></li>
-										<li><a class="dropdown-item" href="{{ route('frontend.baiviet.chude', ['tenchude_slug' => 'cho-moi']) }}">Chợ Mới</a></li>
-										<li><a class="dropdown-item" href="{{ route('frontend.baiviet.chude', ['tenchude_slug' => 'chau-thanh']) }}">Châu Thành</a></li>
-										<li><a class="dropdown-item" href="{{ route('frontend.baiviet.chude', ['tenchude_slug' => 'chau-phu']) }}">Châu Phú</a></li>
-										<li><a class="dropdown-item" href="{{ route('frontend.baiviet.chude', ['tenchude_slug' => 'an-phu']) }}">An Phú</a></li>
-										<li><a class="dropdown-item" href="{{ route('frontend.baiviet.chude', ['tenchude_slug' => 'phu-tan']) }}">Phú Tân</a></li>
-										<li><a class="dropdown-item" href="{{ route('frontend.baiviet.chude', ['tenchude_slug' => 'tan-chau']) }}">Thị xã Tân Châu</a></li>
+										<li><a class="dropdown-item" href="{{ route('frontend.baiviet.diadiem', ['tendiadiem_slug' => 'long-xuyen']) }}">Thành phố Long Xuyên</a></li>
+										<li><a class="dropdown-item" href="{{ route('frontend.baiviet.diadiem', ['tendiadiem_slug' => 'chau-doc']) }}">Thành phố Châu Đốc</a></li>
+										<!-- Các mục khác của địa điểm -->
 									</ul>
 								</li>
+
 								<li class="nav-item">
 									<a class="nav-link" href="{{ route('frontend.lienhe') }}"><i class="ci-support me-2"></i>Liên hệ</a>
 								</li>
 								<li class="nav-item">
-									<a class="nav-link" href="{{ route('frontend.gioithieu') }}"><i class="ci-support me-2"></i>Giới thiệu</a>
+									<a class="nav-link" href="{{ route('frontend.gioithieu') }}"><i class="ci-map me-2"></i>Giới thiệu</a>
 								</li>
 							</ul>
 						</div>

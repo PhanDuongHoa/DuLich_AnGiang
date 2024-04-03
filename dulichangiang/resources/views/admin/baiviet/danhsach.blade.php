@@ -8,6 +8,7 @@
 			<thead>
 				<tr>
 					<th style="vertical-align: middle;text-align: center" width="5%">STT</th>
+					<th style="vertical-align: middle;text-align: center" width="20%">Địa điểm</th>
 					<th style="vertical-align: middle;text-align: center" width="20%">Chủ đề</th>
 					<th style="vertical-align: middle;text-align: center" width="55%">Thông tin bài viết</th>
 					<th style="vertical-align: middle;text-align: center" width="20%" colspan="4" class="text-center">Hành động</th>
@@ -17,6 +18,7 @@
 				@foreach($baiviet as $value)
 					<tr>
 						<td style="vertical-align: middle;text-align: center">{{ $loop->iteration }}</td>
+						<td style="vertical-align: middle;text-align: center">{{ $value->DiaDiem->tendiadiem }}</td>
 						<td style="vertical-align: middle;text-align: center">{{ $value->ChuDe->tenchude }}</td>
 						<td>
 							<span class="d-block fw-bold text-primary"><a href="{{ route('admin.baiviet.sua', ['id' => $value->id]) }}">{{ $value->tieude }}</a></span>

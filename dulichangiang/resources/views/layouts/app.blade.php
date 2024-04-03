@@ -43,6 +43,11 @@
                                         <i class="fa-light fa-fw fa-list-tree"></i> Chủ đề
                                     </a>
                                 </li>
+                                <li>
+                                    <a class="dropdown-item" href="{{ route('admin.diadiem') }}">
+                                        <i class="fa-light fa-fw fa-list-tree"></i> Địa điểm
+                                    </a>
+                                </li>
                                 <li><hr class="dropdown-divider"></li>
                                 <li>
                                     <a class="dropdown-item" href="{{ route('admin.baiviet') }}">

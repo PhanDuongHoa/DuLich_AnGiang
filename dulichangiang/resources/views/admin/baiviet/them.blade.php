@@ -5,6 +5,19 @@
         <div class="card-body">
         <form action="{{ route('admin.baiviet.them') }}" method="post">
             @csrf
+            <!-- Địa điểm -->
+            <div class="mb-3">
+                <label class="form-label" for="diadiem_id">Địa điểm</label>
+                <select class="form-select @error('diadiem_id') is-invalid @enderror" id="diadiem_id" name="diadiem_id" required>
+                <option value="">-- Chọn --</option>
+            @foreach($diadiem as $value)
+                <option value="{{ $value->id }}">{{ $value->tendiadiem }}</option>
+            @endforeach
+                </select>
+            @error('diadiem_id')
+                <div class="invalid-feedback"><strong>{{ $message }}</strong></div>
+            @enderror
+                </div>
                 <div class="mb-3">
                 <label class="form-label" for="chude_id">Chủ đề</label>
                 <select class="form-select @error('chude_id') is-invalid @enderror" id="chude_id" name="chude_id" required>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\ChuDe;
 use App\Models\BaiViet;
 use App\Models\BinhLuanBaiViet;
+use App\Models\DiaDiem;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -70,31 +71,55 @@ class HomeController extends Controller
         return view('frontend.home', compact('baiviet'));
     }
 
-    public function getBaiViet($tenchude_slug = '')
+    public function getBaiVietChuDe($tenchude_slug = '')
     {
         if(empty($tenchude_slug))
         {
             $title = 'Tin tức';
             $baiviet = BaiViet::where('kichhoat', 1)
-                ->where('kiemduyet', 1)
-                ->orderBy('created_at', 'desc')
-                ->paginate(20);
+            ->where('kiemduyet', 1)
+            ->orderBy('created_at', 'desc')
+            ->paginate(20);
         }
         else
         {
             $chude = ChuDe::where('tenchude_slug', $tenchude_slug)
-                ->firstOrFail();
+            ->firstOrFail();
             $title = $chude->tenchude;
             $baiviet = BaiViet::where('kichhoat', 1)
-                ->where('kiemduyet', 1)
-                ->where('chude_id', $chude->id)
-                ->orderBy('created_at', 'desc')
-                ->paginate(20);
+            ->where('kiemduyet', 1)
+            ->where('chude_id', $chude->id)
+            ->orderBy('created_at', 'desc')
+            ->paginate(20);
         }
         return view('frontend.baiviet', compact('title', 'baiviet'));
     }
 
-    public function getBaiViet_ChiTiet($tenchude_slug = '', $tieude_slug = '')
+    public function getBaiVietDiaDiem($tendiadiem_slug = '')
+    {
+        if(empty($tendiadiem_slug))
+        {
+            $title = 'Tin tức';
+            $baiviet = BaiViet::where('kichhoat', 1)
+            ->where('kiemduyet', 1)
+            ->orderBy('created_at', 'desc')
+            ->paginate(20);
+        }
+        else
+        {
+            $diadiem = DiaDiem::where('tendiadiem_slug', $tendiadiem_slug)
+            ->firstOrFail();
+            $title = $diadiem->tendiadiem;
+            $baiviet = BaiViet::where('kichhoat', 1)
+            ->where('kiemduyet', 1)
+            ->where('diadiem_id', $diadiem->id)
+            ->orderBy('created_at', 'desc')
+            ->paginate(20);
+        }
+        return view('frontend.baiviet', compact('title', 'baiviet'));
+    }
+
+    public function getBaiViet_ChiTiet($tendiadiem_slug = '', $tenchude_slug = '', $tieude_slug = '')
     {
         $tieude_id = explode('.', $tieude_slug);
         $tieude = explode('-', $tieude_id[0]);
@@ -156,7 +181,7 @@ class HomeController extends Controller
         $chude = ChuDe::all();
 
         $baiviet = BaiViet::where('tieude', 'like', '%' . $searchTerm . '%')->get();
-        var_dump($baiviet);
+        //var_dump($baiviet);
         return view('frontend.timkiem', compact('baiviet', 'chude'));
     }
 
