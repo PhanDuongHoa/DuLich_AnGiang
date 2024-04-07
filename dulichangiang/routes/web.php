@@ -35,12 +35,10 @@ Route::name('frontend.')->group(function() {
     Route::get('/home', [HomeController::class, 'getHome'])->name('home');
     
     // Tin tức
-    // Cập nhật tệp route web.php
     Route::get('/bai-viet', [HomeController::class, 'getBaiViet'])->name('baiviet');
     Route::get('/bai-viet/chu-de/{tenchude_slug}', [HomeController::class, 'getBaiVietChuDe'])->name('baiviet.chude');
     Route::get('/bai-viet/dia-diem/{tendiadiem_slug}', [HomeController::class, 'getBaiVietDiaDiem'])->name('baiviet.diadiem');
     Route::get('/bai-viet/{tendiadiem_slug}/{tenchude_slug}/{tieude_slug}', [HomeController::class, 'getBaiViet_ChiTiet'])->name('baiviet.chitiet');
-
     Route::get('/baiviet/timkiem', [HomeController::class, 'getTimkiem'])->name('baiviet.timkiem');
     Route::get('/binhluanbaiviet/them', [BinhLuanBaiVietController::class, 'getThem'])->name('binhluanbaiviet.them');
     Route::post('/binhluanbaiviet/them', [BinhLuanBaiVietController::class, 'postThem'])->name('binhluanbaiviet.them');

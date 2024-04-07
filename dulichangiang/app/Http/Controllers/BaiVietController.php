@@ -45,20 +45,23 @@ class BaiVietController extends Controller
     public function getSua($id)
     {
         $chude = ChuDe::all();
+        $diadiem = DiaDiem::all();
         $baiviet = BaiViet::find($id);
-        return view('admin.baiviet.sua', compact('chude', 'baiviet'));
+        return view('admin.baiviet.sua', compact('chude', 'diadiem', 'baiviet'));
     }
     public function postSua(Request $request, $id)
     {
         // Kiểm tra
         $request->validate([
             'chude_id' => ['required', 'integer'],
+            'diadiem_id' => ['required', 'integer'],
             'tieude' => ['required', 'string', 'max:300', 'unique:baiviet,tieude,' . $id],
             'noidung' => ['required', 'string', 'min:20'],
         ]);
 
         $orm = BaiViet::find($id);
         $orm->chude_id = $request->chude_id;
+        $orm->diadiem_id = $request->diadiem_id;
         $orm->tieude = $request->tieude;
         $orm->tieude_slug = Str::slug($request->tieude, '-');
         $orm->tomtat = $request->tomtat;

@@ -23,58 +23,46 @@
     
     <section class="container-fluid pt-grid-gutter mt-5">
         <div class="row">
-            <div class="col-xl-3 col-sm-6 mb-grid-gutter">
+            <div class="col-xl-4 col-sm-6 mb-grid-gutter">
                 <a class="card h-100" href="#map" data-scroll>
                     <div class="card-body text-center">
                         <i class="ci-location h3 mt-2 mb-4 text-primary"></i>
-                        <h3 class="h6 mb-2">Địa chỉ cửa hàng</h3>
-                        <p class="fs-sm text-muted">779 Hà Hoàng Hổ, Long Xuyên, An Giang</p>
+                        <h3 class="h6 mb-2">An Giang</h3>
                         <div class="fs-sm text-primary">Xem bản đồ<i class="ci-arrow-right align-middle ms-1"></i></div>
                     </div>
                 </a>
             </div>
-            <div class="col-xl-3 col-sm-6 mb-grid-gutter">
-                <div class="card h-100">
-                    <div class="card-body text-center">
-                        <i class="ci-time h3 mt-2 mb-4 text-primary"></i>
-                        <h3 class="h6 mb-3">Giờ làm việc</h3>
-                        <ul class="list-unstyled fs-sm text-muted mb-0">
-                            <li>Thứ 2 - Chủ nhật: 08:00 AM - 05:00 PM</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-3 col-sm-6 mb-grid-gutter">
+            <div class="col-xl-4 col-sm-6 mb-grid-gutter">
                 <div class="card h-100">
                     <div class="card-body text-center">
                         <i class="ci-phone h3 mt-2 mb-4 text-primary"></i>
                         <h3 class="h6 mb-3">Điện thoại</h3>
                         <ul class="list-unstyled fs-sm mb-0">
                             <li>
-                                <span class="text-muted me-1">Bán hàng:</span>
+                                <span class="text-muted me-1">Du Lịch An Giang:</span>
                                 <a class="nav-link-style" href="tel:+84123456888">0389 898 989</a>
                             </li>
                             <li class="mb-0">
-                                <span class="text-muted me-1">Hỗ trợ kỹ thuật:</span>
+                                <span class="text-muted me-1">Hỗ trợ tư vấn:</span>
                                 <a class="nav-link-style" href="tel:+84123456999">0397 456 999</a>
                             </li>
                         </ul>
                     </div>
                 </div>
             </div>
-            <div class="col-xl-3 col-sm-6 mb-grid-gutter">
+            <div class="col-xl-4 col-sm-6 mb-grid-gutter">
                 <div class="card h-100">
                     <div class="card-body text-center">
                         <i class="ci-mail h3 mt-2 mb-4 text-primary"></i>
                         <h3 class="h6 mb-3">Địa chỉ email</h3>
                         <ul class="list-unstyled fs-sm mb-0">
                             <li>
-                                <span class="text-muted me-1">Bán hàng:</span>
-                                <a class="nav-link-style" href="mailto:customer@myshop.vn">smartphonestore@gmail.com</a>
+                                <span class="text-muted me-1">Du Lịch An Giang:</span>
+                                <a class="nav-link-style" href="mailto:customer@myshop.vn">dulichangiang@gmail.com</a>
                             </li>
                             <li class="mb-0">
-                                <span class="text-muted me-1">Hỗ trợ kỹ thuật:</span>
-                                <a class="nav-link-style" href="mailto:support@myshop.vn">smartphonestore_support@gmail.vn</a>
+                                <span class="text-muted me-1">Hỗ trợ tư vấn:</span>
+                                <a class="nav-link-style" href="mailto:support@myshop.vn">dulichangiang_support@gmail.vn</a>
                             </li>
                         </ul>
                     </div>
@@ -86,7 +74,7 @@
     <div class="container-fluid px-0" id="map">
         <div class="row g-0">
             <div class="col-lg-6 iframe-full-height-wrap">
-                <iframe class="iframe-full-height" width="600" height="250" iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3924.5465620737414!2d105.434117874799!3d10.378093589747472!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x310a738ec54a13d3%3A0xb4c42f81edfbd345!2zNzc5IMSQLiBIw6AgSG_DoG5nIEjhu5UsIFBoxrDhu51uZyBN4bu5IFh1ecOqbiwgVGjDoG5oIHBo4buRIExvbmcgWHV5w6puLCBBbiBHaWFuZywgVmnhu4d0IE5hbQ!5e0!3m2!1svi!2s!4v1702820360515!5m2!1svi!2s" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>"></iframe>
+                <iframe class="iframe-full-height" width="600" height="250" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d502027.02159501193!2d104.84576250344936!3d10.572434889265173!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x310a198a4ee22a8d%3A0xdc1cb02c52c088ba!2zQW4gR2lhbmcsIFZp4buHdCBOYW0!5e0!3m2!1svi!2s!4v1712138242908!5m2!1svi!2s" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>></iframe>
             </div>
             <div class="col-lg-6 px-4 px-xl-5 py-5 border-top">
                 <h2 class="h4 mb-4">Để lại lời nhắn</h2>

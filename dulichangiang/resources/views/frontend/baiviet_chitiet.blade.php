@@ -21,6 +21,23 @@
 			</div>
 		</div>
 	</div>
+	<div class="container">
+		<div class="bg-secondary px-4 col-lg-4">
+			<div class="box-meunu mt-4" id="box-menu-main-pc">
+				<div class="main-box-menu text-dark">
+					<p class="title">Xem nhanh</p>
+					<a href="#tomtat">Tóm tắt</a>
+					<br>
+					<a href="#noi-dung">Nội dung</a>
+					<br>
+					<a href="#comments">Bình luận</a>
+					<br>
+					<!-- Thêm các href cho các mục khác nếu cần -->
+				</div>
+			</div>
+		</div>
+	</div>
+
 	<div class="container pb-5">
 		<div class="row justify-content-center pt-3 mt-md-3">
 			<div class="col-12">
@@ -37,7 +54,14 @@
 						<a class="blog-entry-meta-link text-nowrap" href="#view" data-scroll><i class="ci-eye"></i>{{ $baiviet->luotxem }}</a>
 					</div>
 				</div>
-				<p style="text-align:justify" class="fw-bold">{{ $baiviet->tomtat }}</p><p style="text-align:justify">{!! $baiviet->noidung !!}</p>
+				<div id="tomtat">
+					<!-- Phần tóm tắt -->
+					<p style="text-align:justify" class="fw-bold">{{ $baiviet->tomtat }}</p>
+				</div>
+				<div id="noi-dung">
+					<!-- Phần nội dung -->
+					<p style="text-align:justify">{!! $baiviet->noidung !!}</p>
+				</div>
 				<div class="d-flex flex-wrap justify-content-between pt-2 pb-4 mb-1">
 					<div class="mt-3 me-3">
 						<a class="btn-tag mb-2" href="#">#{{ $baiviet->ChuDe->tenchude_slug }}</a>

@@ -21507,3 +21507,30 @@ html:not([dir=rtl]) .range-slider-ui.noUi-horizontal .noUi-handle {
 	.flatpickr-time input.flatpickr-hour {
 		font-weight: 700;
 	}
+.box-meunu {
+	background-color: #f8f9fa; /* Màu nền của box menu */
+	padding: 20px; /* Khoảng cách giữa nội dung và viền của box menu */
+}
+
+.main-box-menu {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+}
+
+.main-box-menu .title {
+	font-size: 18px; /* Kích thước chữ cho tiêu đề */
+	font-weight: bold; /* Độ đậm của tiêu đề */
+	margin-bottom: 10px; /* Khoảng cách dưới của tiêu đề */
+}
+
+.main-box-menu a {
+	color: #000; /* Màu chữ cho các liên kết */
+	text-decoration: none; /* Gạch chân cho liên kết */
+	display: block;
+	margin-bottom: 5px; /* Khoảng cách dưới của mỗi liên kết */
+}
+
+.main-box-menu a:hover {
+	text-decoration: underline; /* Hiệu ứng khi di chuột qua liên kết */
+}	

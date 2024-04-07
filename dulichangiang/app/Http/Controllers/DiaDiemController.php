@@ -40,12 +40,12 @@ class DiaDiemController extends Controller
     {
         // Kiểm tra
         $request->validate([
-            'tendiadiem' => ['required', 'string', 'max:191', 'unique:diadiem, tendiadiem,' . $id],
+            'tendiadiem' => ['required', 'string', 'max:191', 'unique:diadiem,tendiadiem,' . $id],
         ]);
 
         $orm = DiaDiem::find($id);
         $orm->tendiadiem = $request->tendiadiem;
-        $orm->tendiadiem_slug = Str::slug($request->tentendiadiemchude, '-');
+        $orm->tendiadiem_slug = Str::slug($request->tendiadiem, '-');
         $orm->save();
         // Sau khi sửa thành công thì tự động chuyển về trang danh sách
         return redirect()->route('admin.diadiem');

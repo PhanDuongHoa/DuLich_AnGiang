@@ -64,6 +64,33 @@ class HomeController extends Controller
         }
     }
 
+    public function getBaiViet($tenchude_slug = '', $tendiadiem_slug = '')
+    {
+        if(empty($tenchude_slug) && empty($tendiadiem_slug))
+        {
+            $title = 'Tin tức';
+            $baiviet = BaiViet::where('kichhoat', 1)
+                ->where('kiemduyet', 1)
+                ->orderBy('created_at', 'desc')
+                ->paginate(20);
+        }
+        else
+        {
+            $diadiem = DiaDiem::where('tendiadiem_slug', $tendiadiem_slug)
+            ->firstOrFail();
+            $chude = ChuDe::where('tenchude_slug', $tenchude_slug)
+                ->firstOrFail();
+            $title = $chude->tenchude;
+            $baiviet = BaiViet::where('kichhoat', 1)
+                ->where('kiemduyet', 1)
+                ->where('chude_id', $chude->id)
+                ->where('diadiem_id', $diadiem->id)
+                ->orderBy('created_at', 'desc')
+                ->paginate(20);
+        }
+        return view('frontend.baiviet', compact('title', 'baiviet'));
+    }
+
     public function getHome()
     {
         // Bổ sung code tại đây

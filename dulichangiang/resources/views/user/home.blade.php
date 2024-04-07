@@ -53,11 +53,6 @@
 										<i class="ci-user opacity-60 me-2"></i>Hồ sơ cá nhân
 									</a>
 								</li>
-								<li class="border-bottom mb-0">
-									<a class="nav-link-style d-flex align-items-center px-4 py-3" href="#">
-										<i class="ci-location opacity-60 me-2"></i>Sổ địa chỉ
-									</a>
-								</li>
 								<li class="d-lg-none border-top mb-0">
 									<a class="nav-link-style d-flex align-items-center px-4 py-3" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
 										<i class="ci-sign-out opacity-60 me-2"></i>Đăng xuất

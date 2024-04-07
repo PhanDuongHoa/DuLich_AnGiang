@@ -92,6 +92,8 @@
 									<ul class="dropdown-menu">
 										<li><a class="dropdown-item" href="{{ route('frontend.baiviet.chude', ['tenchude_slug' => 'tam-linh']) }}">Tâm linh</a></li>
 										<li><a class="dropdown-item" href="{{ route('frontend.baiviet.chude', ['tenchude_slug' => 'am-thuc']) }}">Ẩm thực</a></li>
+										<li><a class="dropdown-item" href="{{ route('frontend.baiviet.chude', ['tenchude_slug' => 'thien-nhien-moi-truong']) }}">Thiên nhiên - Môi trường</a></li>
+										<li><a class="dropdown-item" href="{{ route('frontend.baiviet.chude', ['tenchude_slug' => 'van-hoa-lich-su']) }}">Văn hóa - Lịch sử</a></li>
 									</ul>
 								</li>
 								<li class="nav-item dropdown">
@@ -99,7 +101,15 @@
 									<ul class="dropdown-menu">
 										<li><a class="dropdown-item" href="{{ route('frontend.baiviet.diadiem', ['tendiadiem_slug' => 'long-xuyen']) }}">Thành phố Long Xuyên</a></li>
 										<li><a class="dropdown-item" href="{{ route('frontend.baiviet.diadiem', ['tendiadiem_slug' => 'chau-doc']) }}">Thành phố Châu Đốc</a></li>
-										<!-- Các mục khác của địa điểm -->
+										<li><a class="dropdown-item" href="{{ route('frontend.baiviet.diadiem', ['tendiadiem_slug' => 'cho-moi']) }}">Chợ Mới</a></li>
+										<li><a class="dropdown-item" href="{{ route('frontend.baiviet.diadiem', ['tendiadiem_slug' => 'tri-ton']) }}">Tri Tôn</a></li>
+										<li><a class="dropdown-item" href="{{ route('frontend.baiviet.diadiem', ['tendiadiem_slug' => 'tinh-bien']) }}">Tịnh Biên</a></li>
+										<li><a class="dropdown-item" href="{{ route('frontend.baiviet.diadiem', ['tendiadiem_slug' => 'chau-thanh']) }}">Châu Thành</a></li>
+										<li><a class="dropdown-item" href="{{ route('frontend.baiviet.diadiem', ['tendiadiem_slug' => 'chau-phu']) }}">Châu Phú</a></li>
+										<li><a class="dropdown-item" href="{{ route('frontend.baiviet.diadiem', ['tendiadiem_slug' => 'an-phu']) }}">An Phú</a></li>
+										<li><a class="dropdown-item" href="{{ route('frontend.baiviet.diadiem', ['tendiadiem_slug' => 'tan-chau']) }}">Tân Châu</a></li>
+										<li><a class="dropdown-item" href="{{ route('frontend.baiviet.diadiem', ['tendiadiem_slug' => 'thoai-son']) }}">Thoại Sơn</a></li>
+										<li><a class="dropdown-item" href="{{ route('frontend.baiviet.diadiem', ['tendiadiem_slug' => 'phu-tan']) }}">Phú Tân</a></li>
 									</ul>
 								</li>
 

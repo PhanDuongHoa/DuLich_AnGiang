@@ -26,9 +26,9 @@
                 <div class="row">
                 @foreach($baiviet->sortByDesc('created_at')->take(5) as $value)
             <article class="masonry-grid-item mx-4 mt-4 mb-4">
-                <div class="card" style="max-width:800px">
+                <div class="card">
                     <a class="blog-entry-thumb" href="{{ route('frontend.baiviet.chitiet', ['tendiadiem_slug' => $value->DiaDiem->tendiadiem_slug, 'tenchude_slug' => $value->ChuDe->tenchude_slug, 'tieude_slug' => $value->tieude_slug . '-' . $value->id . '.html']) }}">
-                        <img class="card-img-top" src="{{ LayHinhDauTien($value->noidung) }}" style="width: 150px; height: 150px;"/>
+                        <img class="card-img-top" src="{{ LayHinhDauTien($value->noidung) }}"/>
                     </a>
                     <div class="card-body">
                         <h2 class="h6 blog-entry-title">

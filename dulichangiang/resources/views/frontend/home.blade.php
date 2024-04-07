@@ -25,17 +25,17 @@
         <div class="tns-carousel border-end mx-4 mb-4" style="margin-right:-.0625rem;">
             <div class="tns-carousel-inner" data-carousel-options="{ &quot;nav&quot;: false, &quot;controls&quot;: false, &quot;autoplay&quot;: true, &quot;autoplayTimeout&quot;: 4000, &quot;loop&quot;: true, &quot;responsive&quot;: {&quot;0&quot;:{&quot;items&quot;:1},&quot;360&quot;:{&quot;items&quot;:2},&quot;600&quot;:{&quot;items&quot;:3},&quot;991&quot;:{&quot;items&quot;:4},&quot;1200&quot;:{&quot;items&quot;:4}} }">
                 <div>
-                    <a class="d-block bg-white border py-4 py-sm-5 px-2" href="#" style="margin-right:-.0625rem;">
+                    <a class="d-block bg-white border py-4 py-sm-5 px-2" href="{{ route('frontend.baiviet.diadiem', ['tendiadiem_slug' => 'cho-moi']) }}" style="margin-right:-.0625rem;">
                         <img class="d-block mx-auto" src="{{ asset('public/img/brands/chomoi.jpg') }}" style="width:165px;" />
                     </a>
                 </div>
                 <div>
-                    <a class="d-block bg-white border py-4 py-sm-5 px-2" href="#" style="margin-right:-.0625rem;">
+                    <a class="d-block bg-white border py-4 py-sm-5 px-2" href="{{ route('frontend.baiviet.diadiem', ['tendiadiem_slug' => 'tri-ton']) }}" style="margin-right:-.0625rem;">
                         <img class="d-block mx-auto" src="{{ asset('public/img/brands/triton.jpg') }}" style="width:165px;" />
                     </a>
                 </div>
                 <div>
-                    <a class="d-block bg-white border py-4 py-sm-5 px-2" href="#" style="margin-right:-.0625rem;">
+                    <a class="d-block bg-white border py-4 py-sm-5 px-2" href="{{ route('frontend.baiviet.diadiem', ['tendiadiem_slug' => 'long-xuyen']) }}" style="margin-right:-.0625rem;">
                         <img class="d-block mx-auto" src="{{ asset('public/img/brands/longxuyen.jpg') }}" style="width:165px;" />
                     </a>
                 </div>
@@ -45,32 +45,32 @@
                     </a>
                 </div>
                 <div>
-                    <a class="d-block bg-white border py-4 py-sm-5 px-2" href="#" style="margin-right:-.0625rem;">
+                    <a class="d-block bg-white border py-4 py-sm-5 px-2" href="{{ route('frontend.baiviet.diadiem', ['tendiadiem_slug' => 'chau-thanh']) }}" style="margin-right:-.0625rem;">
                         <img class="d-block mx-auto" src="{{ asset('public/img/brands/chauthanh.jpg') }}" style="width:165px;" />
                     </a>
                 </div>
                 <div>
-                    <a class="d-block bg-white border py-4 py-sm-5 px-2" href="#" style="margin-right:-.0625rem;">
+                    <a class="d-block bg-white border py-4 py-sm-5 px-2" href="{{ route('frontend.baiviet.diadiem', ['tendiadiem_slug' => 'tinh-bien']) }}" style="margin-right:-.0625rem;">
                         <img class="d-block mx-auto" src="{{ asset('public/img/brands/tinhbien.jpg') }}" style="width:165px;" />
                     </a>
                 </div>
                 <div>
-                    <a class="d-block bg-white border py-4 py-sm-5 px-2" href="#" style="margin-right:-.0625rem;">
+                    <a class="d-block bg-white border py-4 py-sm-5 px-2" href="{{ route('frontend.baiviet.diadiem', ['tendiadiem_slug' => 'phu-tan']) }}" style="margin-right:-.0625rem;">
                         <img class="d-block mx-auto" src="{{ asset('public/img/brands/phutan.jpg') }}" style="width:165px;" />
                     </a>
                 </div>
                 <div>
-                    <a class="d-block bg-white border py-4 py-sm-5 px-2" href="#" style="margin-right:-.0625rem;">
+                    <a class="d-block bg-white border py-4 py-sm-5 px-2" href="{{ route('frontend.baiviet.diadiem', ['tendiadiem_slug' => 'an-phu']) }}" style="margin-right:-.0625rem;">
                         <img class="d-block mx-auto" src="{{ asset('public/img/brands/anphu.jpg') }}" style="width:165px;" />
                     </a>
                 </div>
                 <div>
-                    <a class="d-block bg-white border py-4 py-sm-5 px-2" href="#" style="margin-right:-.0625rem;">
+                    <a class="d-block bg-white border py-4 py-sm-5 px-2" href="{{ route('frontend.baiviet.diadiem', ['tendiadiem_slug' => 'tan-chau']) }}" style="margin-right:-.0625rem;">
                         <img class="d-block mx-auto" src="{{ asset('public/img/brands/tanchau.jpg') }}" style="width:165px;" />
                     </a>
                 </div>
                 <div>
-                    <a class="d-block bg-white border py-4 py-sm-5 px-2" href="#" style="margin-right:-.0625rem;">
+                    <a class="d-block bg-white border py-4 py-sm-5 px-2" href="{{ route('frontend.baiviet.diadiem', ['tendiadiem_slug' => 'thoai-son']) }}" style="margin-right:-.0625rem;">
                         <img class="d-block mx-auto" src="{{ asset('public/img/brands/thoaison.jpg') }}" style="width:165px;" />
                     </a>
                 </div>
@@ -99,7 +99,7 @@
             <article class="masonry-grid-item mx-4 mt-4 mb-4">
                 <div class="card" style="max-width:800px">
                     <a class="blog-entry-thumb" href="{{ route('frontend.baiviet.chitiet', ['tendiadiem_slug' => $value->DiaDiem->tendiadiem_slug, 'tenchude_slug' => $value->ChuDe->tenchude_slug, 'tieude_slug' => $value->tieude_slug . '-' . $value->id . '.html']) }}">
-                        <img class="card-img-top" src="{{ LayHinhDauTien($value->noidung) }}" style="width: 150px; height: 150px;"/>
+                        <img class="card-img-top" src="{{ LayHinhDauTien($value->noidung) }}" style="width: 400px; height: 300px;"/>
                     </a>
                     <div class="card-body">
                         <h2 class="h6 blog-entry-title">
@@ -143,19 +143,13 @@
                         </li>
                         <li>
                             <div class="d-flex justify-content-between fruite-name">
-                                <a href="{{ route('frontend.baiviet.chude', ['tenchude_slug' =>'thien-nhien-va-moi-truong']) }}"><i class="bi bi-newspaper"></i>Thiên nhiên và môi trường</a>
+                                <a href="{{ route('frontend.baiviet.chude', ['tenchude_slug' =>'thien-nhien-moi-truong']) }}"><i class="bi bi-newspaper"></i>Thiên nhiên và môi trường</a>
                                 
                             </div>
                         </li>
                         <li>
                             <div class="d-flex justify-content-between fruite-name">
-                                <a href="{{ route('frontend.baiviet.chude', ['tenchude_slug' =>'van-hoa']) }}"><i class="bi bi-newspaper"></i>Văn hóa</a>
-                                
-                            </div>
-                        </li>
-                        <li>
-                            <div class="d-flex justify-content-between fruite-name">
-                                <a href="{{ route('frontend.baiviet.chude', ['tenchude_slug' =>'lich-su']) }}"><i class="bi bi-newspaper"></i>Lịch sử</a>
+                                <a href="{{ route('frontend.baiviet.chude', ['tenchude_slug' =>'van-hoa-lich-su']) }}"><i class="bi bi-newspaper"></i>Văn hóa - Lịch sử</a>
                                 
                             </div>
                         </li>

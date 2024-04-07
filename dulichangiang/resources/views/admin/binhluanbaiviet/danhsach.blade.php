@@ -14,7 +14,6 @@
 						<th style="vertical-align: middle;text-align: center" width="20%" colspan="4" class="text-center">Hành động</th>
 					</tr>
 				</thead>
-
 				<tbody>
 					@foreach($binhluanbaiviet as $value)
 						<tr>
