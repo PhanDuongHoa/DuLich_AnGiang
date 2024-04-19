@@ -9,6 +9,9 @@ use App\Http\Controllers\ChuDeController;
 use App\Http\Controllers\BaiVietController;
 use App\Http\Controllers\BinhLuanBaiVietController;
 use App\Http\Controllers\DiaDiemController;
+use App\Http\Controllers\DoiTacController;
+use App\Http\Controllers\LienHeController;
+use App\Http\Controllers\GoogleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,6 +31,10 @@ Auth::routes();
 Route::get('/login/google', [HomeController::class, 'getGoogleLogin'])->name('google.login');
 Route::get('/login/google/callback', [HomeController::class, 'getGoogleCallback'])->name('google.callback');
 
+//Facebook Login
+Route::get('/login/facebook', [HomeController::class, 'redirectToFacebook'])->name('facebook.login');
+Route::get('/login/facebook/callback', [HomeController::class, 'handleFacebookCallback'])->name('facebook.callback');
+
 // Các trang dành cho khách chưa đăng nhập
 Route::name('frontend.')->group(function() {
     // Trang chủ
@@ -38,17 +45,20 @@ Route::name('frontend.')->group(function() {
     Route::get('/bai-viet', [HomeController::class, 'getBaiViet'])->name('baiviet');
     Route::get('/bai-viet/chu-de/{tenchude_slug}', [HomeController::class, 'getBaiVietChuDe'])->name('baiviet.chude');
     Route::get('/bai-viet/dia-diem/{tendiadiem_slug}', [HomeController::class, 'getBaiVietDiaDiem'])->name('baiviet.diadiem');
+    Route::get('/bai-viet/doi-tac/{tendoitac_slug}', [HomeController::class, 'getBaiVietDoiTac'])->name('baiviet.doitac');
     Route::get('/bai-viet/{tendiadiem_slug}/{tenchude_slug}/{tieude_slug}', [HomeController::class, 'getBaiViet_ChiTiet'])->name('baiviet.chitiet');
     Route::get('/baiviet/timkiem', [HomeController::class, 'getTimkiem'])->name('baiviet.timkiem');
     Route::get('/binhluanbaiviet/them', [BinhLuanBaiVietController::class, 'getThem'])->name('binhluanbaiviet.them');
     Route::post('/binhluanbaiviet/them', [BinhLuanBaiVietController::class, 'postThem'])->name('binhluanbaiviet.them');
-
-
+    Route::get('/binhluanbaiviet/sua/{id}', [BinhLuanBaiVietController::class, 'getSua'])->name('binhluanbaiviet.sua');
+    Route::post('/binhluanbaiviet/sua/{id}', [BinhLuanBaiVietController::class, 'postSua'])->name('binhluanbaiviet.sua');
+    
     // Tuyển dụng
     Route::get('/tuyen-dung', [HomeController::class, 'getTuyenDung'])->name('tuyendung');
     
     // Liên hệ
     Route::get('/lien-he', [HomeController::class, 'getLienHe'])->name('lienhe');
+    Route::post('/lien-he', [HomeController::class, 'postLienHe'])->name('lienhe');
     Route::get('/gioi-thieu', [HomeController::class, 'getGioiThieu'])->name('gioithieu');
 });
 
@@ -57,7 +67,7 @@ Route::get('/khach-hang/dang-ky', [HomeController::class, 'getDangKy'])->name('u
 Route::get('/khach-hang/dang-nhap', [HomeController::class, 'getDangNhap'])->name('user.dangnhap');
 
 // Trang tài khoản khách hàng
-Route::prefix('khach-hang')->name('user.')->group(function() {
+Route::prefix('khach-hang')->name('user.')->middleware(['auth', 'user'])->group(function() {
     // Trang chủ
     Route::get('/', [KhachHangController::class, 'getHome'])->name('home');
     Route::get('/home', [KhachHangController::class, 'getHome'])->name('home');
@@ -71,7 +81,7 @@ Route::prefix('khach-hang')->name('user.')->group(function() {
 });
 
 // Trang tài khoản quản lý
-Route::prefix('admin')->name('admin.')->group(function() {
+Route::prefix('admin')->name('admin.')->middleware(['auth', 'manager'])->group(function() {
     // Trang chủ
     Route::get('/', [AdminController::class, 'getHome'])->name('home');
     Route::get('/home', [AdminController::class, 'getHome'])->name('home');
@@ -99,6 +109,14 @@ Route::prefix('admin')->name('admin.')->group(function() {
     Route::get('/diadiem/sua/{id}', [DiaDiemController::class, 'getSua'])->name('diadiem.sua');
     Route::post('/diadiem/sua/{id}', [DiaDiemController::class, 'postSua'])->name('diadiem.sua');
     Route::get('/diadiem/xoa/{id}', [DiaDiemController::class, 'getXoa'])->name('diadiem.xoa');
+
+    // Quản lý Đối tác
+    Route::get('/doitac', [DoiTacController::class, 'getDanhSach'])->name('doitac');
+    Route::get('/doitac/them', [DoiTacController::class, 'getThem'])->name('doitac.them');
+    Route::post('/doitac/them', [DoiTacController::class, 'postThem'])->name('doitac.them');
+    Route::get('/doitac/sua/{id}', [DoiTacController::class, 'getSua'])->name('doitac.sua');
+    Route::post('/doitac/sua/{id}', [DoiTacController::class, 'postSua'])->name('doitac.sua');
+    Route::get('/doitac/xoa/{id}', [DoiTacController::class, 'getXoa'])->name('doitac.xoa');
     
     // Quản lý Bài viết
     Route::get('/baiviet', [BaiVietController::class, 'getDanhSach'])->name('baiviet');
@@ -112,9 +130,21 @@ Route::prefix('admin')->name('admin.')->group(function() {
     
     // Quản lý Bình luận bài viết
     Route::get('/binhluanbaiviet', [BinhLuanBaiVietController::class, 'getDanhSach'])->name('binhluanbaiviet');
-    Route::get('/binhluanbaiviet/sua/{id}', [BinhLuanBaiVietController::class, 'getSua'])->name('binhluanbaiviet.sua');
-    Route::post('/binhluanbaiviet/sua/{id}', [BinhLuanBaiVietController::class, 'postSua'])->name('binhluanbaiviet.sua');
     Route::get('/binhluanbaiviet/xoa/{id}', [BinhLuanBaiVietController::class, 'getXoa'])->name('binhluanbaiviet.xoa');
     Route::get('/binhluanbaiviet/kiemduyet/{id}', [BinhLuanBaiVietController::class, 'getKiemDuyet'])->name('binhluanbaiviet.kiemduyet');
     Route::get('/binhluanbaiviet/kichhoat/{id}', [BinhLuanBaiVietController::class, 'getKichHoat'])->name('binhluanbaiviet.kichhoat');
+    Route::get('/binhluanbaiviet/sua/{id}', [BinhLuanBaiVietController::class, 'getSua'])->name('binhluanbaiviet.sua');
+    Route::post('/binhluanbaiviet/sua/{id}', [BinhLuanBaiVietController::class, 'postSua'])->name('binhluanbaiviet.sua');
+
+    Route::get('/lienhe', [LienHeController::class, 'getDanhSach'])->name('lienhe');
+    Route::get('/lienhe/xuat', [LienHeController::class, 'getXuat'])->name('lienhe.xuat');
+});
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified',
+])->group(function () {
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
 });

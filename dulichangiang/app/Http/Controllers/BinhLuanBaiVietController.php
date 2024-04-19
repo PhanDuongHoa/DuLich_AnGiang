@@ -40,26 +40,30 @@ class BinhLuanBaiVietController extends Controller
     }
     public function getSua($id)
     {
-        $baiviet = BaiViet::orderBy('created_at', 'desc')->get();
         $binhluanbaiviet = BinhLuanBaiViet::find($id);
-        $user = User::all();
-        return view('admin.binhluanbaiviet.sua', compact('baiviet', 'binhluanbaiviet','user'));
+        if (!$binhluanbaiviet) {
+            return redirect()->route('frontend.home')->with('error', 'Bình luận không tồn tại.');
+        }
+        return view('frontend.binhluanbaiviet.sua', compact('binhluanbaiviet'));
     }
+
     public function postSua(Request $request, $id)
     {
-        // Kiểm tra
         $request->validate([
-            'baiviet_id' => ['required'],
-            'user_id'=>['required']
+            'noidungbinhluan' => 'required|string|max:255', // Cập nhật quy định về nội dung bình luận nếu cần thiết
         ]);
-        $orm = BinhLuanBaiViet::find($id);
-        $orm->baiviet_id = $request->baiviet_id;
-        $orm->user_id = $request->user_id;
-        $orm->noidungbinhluan = $request->noidungbinhluan;
-        $orm->save();
-        // Sau khi sửa thành công thì tự động chuyển về trang danh sách
-        return redirect()->route('admin.binhluanbaiviet');
+
+        $binhluanbaiviet = BinhLuanBaiViet::find($id);
+        if (!$binhluanbaiviet) {
+            return redirect()->route('frontend.home')->with('error', 'Bình luận không tồn tại.');
+        }
+
+        $binhluanbaiviet->noidungbinhluan = $request->noidungbinhluan;
+        $binhluanbaiviet->save();
+
+        return redirect()->route('frontend.baiviet.chitiet', ['tendiadiem_slug' => $binhluanbaiviet->baiviet->tieude, 'tenchude_slug' => $binhluanbaiviet->baiviet->chude->tenchude_slug, 'tieude_slug' => $binhluanbaiviet->baiviet->tieude_slug . '-' . $binhluanbaiviet->baiviet->id . '.html'])->with('success', 'Bình luận đã được cập nhật thành công.');
     }
+
     public function getXoa($id)
     {
         $orm = BinhLuanBaiViet::find($id);

@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('chude_id')->constrained('chude');
             $table->foreignId('diadiem_id')->constrained('diadiem');
+            $table->foreignId('doitac_id')->constrained('doitac');
             $table->foreignId('user_id')->constrained('users');
             $table->text('tieude');
             $table->text('tieude_slug');

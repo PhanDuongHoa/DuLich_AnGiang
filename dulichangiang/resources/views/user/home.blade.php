@@ -29,7 +29,7 @@
 						<div class="d-md-flex justify-content-between align-items-center text-center text-md-start p-4">
 							<div class="d-md-flex align-items-center">
 								<div class="img-thumbnail rounded-circle position-relative flex-shrink-0 mx-auto mb-2 mx-md-0 mb-md-0" style="width:6.375rem;">
-									<img class="rounded-circle" src="{{ asset('public/img/avatar.jpg') }}" />
+									<img class="rounded-circle" src="{{ asset('public/img/avt.jpg') }}" />
 								</div>
 								<div class="ps-md-3">
 									<h3 class="fs-base mb-0">{{ $nguoidung->name }}</h3>
@@ -86,7 +86,7 @@
                          @csrf
                         <div class="bg-secondary rounded-3 p-4 mb-4">
                             <div class="d-flex align-items-center">
-                            <img class="rounded" src="{{ asset('public/img/avatar.jpg') }}" width="90" />
+                            <img class="rounded" src="{{ asset('public/img/avt.jpg') }}" width="90" />
                             <div class="ps-3">
                             <button class="btn btn-light btn-shadow btn-sm mb-2" type="button">
                             <i class="ci-loading me-2"></i>Đổi ảnh đại diện

@@ -9,7 +9,7 @@
                 <div class="col-md-5">
                     <div class="px-4 pe-sm-0 ps-sm-5">
                         <span class="badge bg-danger">Du Lịch An Giang</span>
-                        <h3 class="mt-4 mb-1 text-body fw-light">Địa điểm du lịch</h3>
+                        <h3 class="mt-4 mb-1 text-body fw-light">Giới thiệu địa điểm du lịch</h3>
                         <h2 class="mb-1">nổi tiếng</h2>
                         <p class="h5 text-body fw-light">tại An Giang</p>
                         <a class="btn btn-accent" href="{{ route('frontend.baiviet') }}">Xem tất cả<i class="ci-arrow-right fs-ms ms-1"></i></a>
@@ -95,22 +95,22 @@
         <h2 class="mx-4 mt-4 text-center">Bài viết nổi bật</h2>
         <div class="row">
         <div class="col-lg-8">
-        @foreach($baiviet->sortByDesc('created_at')->take(5) as $value)
+        @foreach($baiviet->sortByDesc('luotxem')->take(5) as $value)
             <article class="masonry-grid-item mx-4 mt-4 mb-4">
                 <div class="card" style="max-width:800px">
-                    <a class="blog-entry-thumb" href="{{ route('frontend.baiviet.chitiet', ['tendiadiem_slug' => $value->DiaDiem->tendiadiem_slug, 'tenchude_slug' => $value->ChuDe->tenchude_slug, 'tieude_slug' => $value->tieude_slug . '-' . $value->id . '.html']) }}">
-                        <img class="card-img-top" src="{{ LayHinhDauTien($value->noidung) }}" style="width: 400px; height: 300px;"/>
-                    </a>
-                    <div class="card-body">
-                        <h2 class="h6 blog-entry-title">
-                            <a href="{{ route('frontend.baiviet.chitiet', ['tendiadiem_slug' => $value->DiaDiem->tendiadiem_slug, 'tenchude_slug' => $value->ChuDe->tenchude_slug, 'tieude_slug' => $value->tieude_slug . '-' . $value->id . '.html']) }}">
-                                {{ $value->tieude }}
-                            </a>
-                        </h2>
-                        <p class="fs-sm" style="text-align:justify">{{ $value->tomtat }}</p>
-                        <a class="btn-tag me-2 mb-2" href="{{ route('frontend.baiviet.chude', ['tenchude_slug' => $value->ChuDe->tenchude_slug]) }}">{{ $value->ChuDe->tenchude }}</a>
-                        <a class="btn-tag me-2 mb-2" href="{{ route('frontend.baiviet.diadiem', ['tendiadiem_slug' => $value->DiaDiem->tendiadiem_slug]) }}">{{ $value->DiaDiem->tendiadiem }}</a>
-                    </div>
+                        <a class="blog-entry-thumb" href="{{ route('frontend.baiviet.chitiet', ['tendiadiem_slug' => $value->DiaDiem->tendiadiem_slug, 'tenchude_slug' => $value->ChuDe->tenchude_slug, 'tieude_slug' => $value->tieude_slug . '-' . $value->id . '.html']) }}">
+                            <img class="card-img-top me-2" src="{{ LayHinhDauTien($value->noidung) }}" style="width: 900px; height: 300px; object-fit: cover; display: block; margin: auto; "/>
+                        </a>
+                        <div class="card-body">
+                            <h2 class="h6 blog-entry-title me-2">
+                                <a href="{{ route('frontend.baiviet.chitiet', ['tendiadiem_slug' => $value->DiaDiem->tendiadiem_slug, 'tenchude_slug' => $value->ChuDe->tenchude_slug, 'tieude_slug' => $value->tieude_slug . '-' . $value->id . '.html']) }}">
+                                    {{ $value->tieude }}
+                                </a>
+                            </h2>
+                            <p class="fs-sm me-2" style="text-align:justify">{{ $value->tomtat }}</p>
+                            <a class="btn-tag me-2 mb-2" href="{{ route('frontend.baiviet.chude', ['tenchude_slug' => $value->ChuDe->tenchude_slug]) }}">{{ $value->ChuDe->tenchude }}</a>
+                            <a class="btn-tag me-2 mb-2" href="{{ route('frontend.baiviet.diadiem', ['tendiadiem_slug' => $value->DiaDiem->tendiadiem_slug]) }}">{{ $value->DiaDiem->tendiadiem }}</a>
+                        </div>
                     <div class="card-footer d-flex align-items-center fs-xs">
                         <a class="blog-entry-meta-link" href="{{ route('user.home') }}">
                             <div class="blog-entry-author-ava"><img src="{{ asset('public/img/03.jpg') }}" /></div>{{ $value->User->name }}
@@ -131,25 +131,25 @@
                     <ul class="list-unstyled fruite-categorie border-top mx-4">
                         <li>
                             <div class="d-flex justify-content-between fruite-name mt-2">
-                                <a href="{{ route('frontend.baiviet.chude', ['tenchude_slug' =>'tam-linh']) }}"><i class="bi bi-newspaper"></i>Tâm linh</a>
+                                <a href="{{ route('frontend.baiviet.chude', ['tenchude_slug' =>'tam-linh']) }}"><i class="bi bi-newspaper me-2"></i>Tâm linh</a>
                                 
                             </div>
                         </li>
                         <li>
                             <div class="d-flex justify-content-between fruite-name">
-                                <a href="{{ route('frontend.baiviet.chude', ['tenchude_slug' =>'am-thuc']) }}"><i class="bi bi-newspaper"></i>Ẩm thực</a>
+                                <a href="{{ route('frontend.baiviet.chude', ['tenchude_slug' =>'am-thuc']) }}"><i class="bi bi-newspaper me-2"></i>Ẩm thực</a>
                                 
                             </div>
                         </li>
                         <li>
                             <div class="d-flex justify-content-between fruite-name">
-                                <a href="{{ route('frontend.baiviet.chude', ['tenchude_slug' =>'thien-nhien-moi-truong']) }}"><i class="bi bi-newspaper"></i>Thiên nhiên và môi trường</a>
+                                <a href="{{ route('frontend.baiviet.chude', ['tenchude_slug' =>'thien-nhien-moi-truong']) }}"><i class="bi bi-newspaper me-2"></i>Thiên nhiên và môi trường</a>
                                 
                             </div>
                         </li>
                         <li>
                             <div class="d-flex justify-content-between fruite-name">
-                                <a href="{{ route('frontend.baiviet.chude', ['tenchude_slug' =>'van-hoa-lich-su']) }}"><i class="bi bi-newspaper"></i>Văn hóa - Lịch sử</a>
+                                <a href="{{ route('frontend.baiviet.chude', ['tenchude_slug' =>'van-hoa-lich-su']) }}"><i class="bi bi-newspaper me-2"></i>Văn hóa - Lịch sử</a>
                                 
                             </div>
                         </li>

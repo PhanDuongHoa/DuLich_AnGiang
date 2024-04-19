@@ -78,30 +78,31 @@
             </div>
             <div class="col-lg-6 px-4 px-xl-5 py-5 border-top">
                 <h2 class="h4 mb-4">Để lại lời nhắn</h2>
-                <form class="needs-validation mb-3" novalidate>
+                <form class="needs-validation" action="{{route('frontend.lienhe')}}" method = "POST" enctype="multipart/form-data">
+                    @csrf
                     <div class="row g-3">
-                        <div class="col-sm-6">
+                        <div class="col-sm-20">
                             <label class="form-label" for="HoVaTen">Họ và tên:&nbsp;<span class="text-danger">*</span></label>
-                            <input class="form-control" type="text" id="HoVaTen" placeholder="Nhập đầy đủ họ tên" required />
+                            <input class="form-control" type="text" id="hoten" name="hoten"  placeholder="Nguyễn Văn An" required />
                             <div class="invalid-feedback">Vui lòng nhập họ và tên của bạn!</div>
                         </div>
-                        <div class="col-sm-6">
+                        <div class="col-sm-20">
                             <label class="form-label" for="Email">Địa chỉ email:&nbsp;<span class="text-danger">*</span></label>
-                            <input class="form-control" type="email" id="Email" placeholder="example@email.com" required />
+                            <input class="form-control" type="email" id="email" name="email" placeholder="nguyenan@email.com" required />
                             <div class="invalid-feedback">Địa chỉ email không được bỏ trống!</div>
                         </div>
-                        <div class="col-sm-6">
+                        <div class="col-sm-20">
                             <label class="form-label" for="DienThoai">Điện thoại:&nbsp;<span class="text-danger">*</span></label>
-                            <input class="form-control" type="text" id="DienThoai" required />
+                            <input class="form-control" type="text" name="dienthoai"  id="dienthoai" placeholder="0123 456 789" required />
                             <div class="invalid-feedback">Vui lòng cung cấp số điện thoại hợp lệ!</div>
                         </div>
-                        <div class="col-sm-6">
+                        <div class="col-sm-20">
                             <label class="form-label" for="ChuDe">Chủ đề:</label>
-                            <input class="form-control" type="text" id="ChuDe" placeholder="Cung cấp tiêu đề ngắn gọn" />
+                            <input class="form-control" type="text" name="chude" id="chude" placeholder="Cung cấp tiêu đề ngắn gọn" />
                         </div>
-                        <div class="col-12">
+                        <div class="col-30">
                             <label class="form-label" for="NoiDung">Nội dung tin nhắn:&nbsp;<span class="text-danger">*</span></label>
-                            <textarea class="form-control" id="NoiDung" rows="6" placeholder="Hãy mô tả chi tiết yêu cầu của bạn" required></textarea>
+                            <textarea class="form-control" name="noidung"  id="noidung" rows="6" placeholder="Hãy mô tả chi tiết yêu cầu của bạn" required></textarea>
                             <div class="invalid-feedback">Nội dung tin nhắn không được bỏ trống!</div>
                             <button class="btn btn-primary mt-4" type="submit">Gởi tin nhắn</button>
                         </div>

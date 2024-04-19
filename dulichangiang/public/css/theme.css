@@ -21328,7 +21328,7 @@ html:not([dir=rtl]) .range-slider-ui.noUi-horizontal .noUi-handle {
 		clear: both;
 		content: "";
 	}
-
+	
 	.masonry-grid[data-columns] .masonry-grid-item {
 		width: 100%;
 		float: left;
@@ -21534,3 +21534,28 @@ html:not([dir=rtl]) .range-slider-ui.noUi-horizontal .noUi-handle {
 .main-box-menu a:hover {
 	text-decoration: underline; /* Hiệu ứng khi di chuột qua liên kết */
 }	
+
+/* CSS để điều chỉnh lại khung */
+.box-menu {
+    border: 1px solid #ccc; /* Đổi màu khung thành màu xám nhạt */
+    padding: 10px; /* Tăng khoảng cách giữa nội dung và khung */
+    border-radius: 5px; /* Làm cong các góc của khung */
+    background-color: #f8f9fa; /* Màu nền cho khung */
+    max-width: 300px; /* Đặt chiều rộng tối đa cho khung */
+    margin: 0 auto; /* Canh giữa khung */
+}
+
+.title {
+    font-weight: bold; /* Tăng độ đậm cho tiêu đề */
+}
+
+.main-box-menu a {
+    color: #333; /* Đổi màu chữ của các liên kết */
+    text-decoration: none; /* Loại bỏ gạch chân của các liên kết */
+    display: block; /* Hiển thị mỗi liên kết trên một dòng */
+    margin-bottom: 5px; /* Tăng khoảng cách giữa các liên kết */
+}
+
+.main-box-menu a:hover {
+    text-decoration: underline; /* Gạch chân khi di chuột qua liên kết */
+}

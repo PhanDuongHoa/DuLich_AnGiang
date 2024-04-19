@@ -21,19 +21,22 @@
 			</div>
 		</div>
 	</div>
-	<div class="container">
-		<div class="bg-secondary px-4 col-lg-4">
-			<div class="box-meunu mt-4" id="box-menu-main-pc">
-				<div class="main-box-menu text-dark">
-					<p class="title">Xem nhanh</p>
-					<a href="#tomtat">Tóm tắt</a>
-					<br>
-					<a href="#noi-dung">Nội dung</a>
-					<br>
-					<a href="#comments">Bình luận</a>
-					<br>
-					<!-- Thêm các href cho các mục khác nếu cần -->
+	<div class="container pb-5">
+		<!-- Mục lục -->
+		<div id="toc" class="mb-4 mt-4">
+			<h2>Mục lục</h2>
+			<ul id="toc-list"></ul>
+		</div>
+		<div class="row justify-content-center pt-3 mt-md-3">
+			<div class="col-12">
+				<div class="d-flex flex-wrap justify-content-between align-items-center pb-4 mt-n1">
+					<!-- Header bài viết -->
 				</div>
+				<!-- Phần nội dung -->
+				<div id="content">
+					{!! $baiviet->noidung !!}
+				</div>
+				<!-- Comments và các phần khác của bài viết -->
 			</div>
 		</div>
 	</div>
@@ -76,26 +79,33 @@
 					<div class="container" id="comments">
 					<h2 class="h4">Bình luận<span class="badge bg-secondary fs-sm text-body align-middle ms-2">{{ $binhluanbaiviet->count() }}</span></h2>
 					@foreach($binhluanbaiviet as $value)
-					<div class="d-flex align-items-start py-3">
-						<img class="rounded-circle" src="{{ asset('/storage/app/' . $value->User->hinhanh) }}" width="50" />
-						<div class="ps-3">
-							<div class="d-flex justify-content-between align-items-center mb-2">
-								<h6 class="fs-md mb-0">{{ $value->User->name }}</h6>
+						<div class="d-flex align-items-start py-3">
+							<img class="rounded-circle" src="{{ asset('public/img/avt.jpg') }}" width="50" />
+							<div class="ps-3">
+								<div class="d-flex justify-content-between align-items-center mb-2">
+									<h6 class="fs-md mb-0">{{ html_entity_decode($value->User->name) }}</h6>
+									<!-- Thay đổi nút sửa bình luận -->
+								</div>
+								<p class="fs-md mb-5" style="text-align:justify">{{ strip_tags(html_entity_decode($value->noidungbinhluan)) }}</p>
+								<span class="fs-ms text-muted"><i class="ci-time align-middle me-2"></i>{{ Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $value->created_at)->format('d/m/Y') }}</span>
+								<!-- Nếu người dùng có quyền sửa bình luận, hiển thị nút sửa -->
+								@if(Auth::check() && Auth::user()->id == $value->user_id)
+									<a href="{{ route('frontend.binhluanbaiviet.sua', ['id' => $value->id]) }}" class="btn btn-sm btn-primary">
+										<i class="bi bi-pencil"></i> Sửa
+									</a>
+								@endif
 							</div>
-
-							<p class="fs-md mb-5" style="text-align:justify">{{ $value->noidungbinhluan }}</p>
-
-							<span class="fs-ms text-muted"><i class="ci-time align-middle me-2"></i>{{ Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $value->created_at)->format('d/m/Y') }}</span>
 						</div>
-					</div>
 					@endforeach
+
+
 
 					<div class="card border-0 shadow mt-2 mb-4 col-10">
 
 						<div class="card-body ">
 							<div class="d-flex align-items-start">
 								@if(Auth::check())
-								<img class="rounded-circle col-1" src="{{ asset('/storage/app/' . Auth::user()->hinhanh) }}" width="50" />
+								<img class="rounded-circle col-1" src="{{ asset('public/img/avt.jpg') }}" width="30" />
 
 								<form action="{{ route('frontend.binhluanbaiviet.them') }}" method="POST">
 									<div class="form-group">
@@ -162,4 +172,23 @@
 			</div>
 		</div>
 	</div>
+	<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var headings = document.querySelectorAll("#content h2, #content h3, #content h4, #content h5, #content h6");
+        var tocList = document.getElementById("toc-list");
+
+        headings.forEach(function(heading) {
+            var listItem = document.createElement("li");
+            var link = document.createElement("a");
+            link.textContent = heading.textContent;
+            link.setAttribute("href", "#" + heading.id);
+            link.addEventListener("click", function(event) {
+                event.preventDefault();
+                heading.scrollIntoView({ behavior: "smooth", block: "start" });
+            });
+            listItem.appendChild(link);
+            tocList.appendChild(listItem);
+        });
+    });
+</script>
 @endsection

@@ -6,14 +6,16 @@ use App\Models\ChuDe;
 use App\Models\BaiViet;
 use App\Models\BinhLuanBaiViet;
 use App\Models\DiaDiem;
+use App\Models\DoiTac;
 use App\Models\User;
+use App\Models\LienHe;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
-use Cart;
-use Socialite;
+use Exception;
+use Laravel\Socialite\Facades\Socialite;
 
 class HomeController extends Controller
 {
@@ -22,6 +24,42 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
+
+    public function redirectToFacebook()
+    {
+        return Socialite::driver('facebook')->redirect();
+    }
+
+    public function handleFacebookCallback()
+    {
+        try {
+        
+            $user = Socialite::driver('facebook')->user();
+         
+            $finduser = User::where('facebook_id', $user->id)->first();
+         
+            if($finduser){
+         
+                Auth::login($finduser);
+       
+                return redirect()->route('user.home');
+         
+            }else{
+                $newUser = User::updateOrCreate(['email' => $user->email],[
+                        'name' => $user->name,
+                        'facebook_id'=> $user->id,
+                        'password' => encrypt('1234')
+                    ]);
+        
+                Auth::login($newUser, true);
+                return redirect()->route('user.home');
+            }
+       
+        } catch (Exception $e) {
+            dd($e->getMessage());
+            return redirect()->route('user.dangnhap')->with('warning', 'Lỗi xác thực. Xin vui lòng thử lại!');
+        }
+    }
 
     public function getGoogleLogin()
     {
@@ -64,7 +102,7 @@ class HomeController extends Controller
         }
     }
 
-    public function getBaiViet($tenchude_slug = '', $tendiadiem_slug = '')
+    public function getBaiViet($tenchude_slug = '', $tendiadiem_slug = '', $tendoitac_slug = '')
     {
         if(empty($tenchude_slug) && empty($tendiadiem_slug))
         {
@@ -72,7 +110,7 @@ class HomeController extends Controller
             $baiviet = BaiViet::where('kichhoat', 1)
                 ->where('kiemduyet', 1)
                 ->orderBy('created_at', 'desc')
-                ->paginate(20);
+                ->paginate(9);
         }
         else
         {
@@ -80,13 +118,16 @@ class HomeController extends Controller
             ->firstOrFail();
             $chude = ChuDe::where('tenchude_slug', $tenchude_slug)
                 ->firstOrFail();
+            $doitac = DoiTac::where('tendoitac_slug', $tendoitac_slug)
+            ->firstOrFail();
             $title = $chude->tenchude;
             $baiviet = BaiViet::where('kichhoat', 1)
                 ->where('kiemduyet', 1)
                 ->where('chude_id', $chude->id)
                 ->where('diadiem_id', $diadiem->id)
+                ->where('doitac_id', $doitac->id)
                 ->orderBy('created_at', 'desc')
-                ->paginate(20);
+                ->paginate(9);
         }
         return view('frontend.baiviet', compact('title', 'baiviet'));
     }
@@ -106,7 +147,7 @@ class HomeController extends Controller
             $baiviet = BaiViet::where('kichhoat', 1)
             ->where('kiemduyet', 1)
             ->orderBy('created_at', 'desc')
-            ->paginate(20);
+            ->paginate(9);
         }
         else
         {
@@ -117,7 +158,31 @@ class HomeController extends Controller
             ->where('kiemduyet', 1)
             ->where('chude_id', $chude->id)
             ->orderBy('created_at', 'desc')
-            ->paginate(20);
+            ->paginate(9);
+        }
+        return view('frontend.baiviet', compact('title', 'baiviet'));
+    }
+
+    public function getBaiVietDoiTac($tendoitac_slug = '')
+    {
+        if(empty($tendoitac_slug))
+        {
+            $title = 'Tin tức';
+            $baiviet = BaiViet::where('kichhoat', 1)
+            ->where('kiemduyet', 1)
+            ->orderBy('created_at', 'desc')
+            ->paginate(9);
+        }
+        else
+        {
+            $doitac = DoiTac::where('tendoitac_slug', $tendoitac_slug)
+            ->firstOrFail();
+            $title = $doitac->tendoitac;
+            $baiviet = BaiViet::where('kichhoat', 1)
+            ->where('kiemduyet', 1)
+            ->where('doitac_id', $doitac->id)
+            ->orderBy('created_at', 'desc')
+            ->paginate(9);
         }
         return view('frontend.baiviet', compact('title', 'baiviet'));
     }
@@ -130,7 +195,7 @@ class HomeController extends Controller
             $baiviet = BaiViet::where('kichhoat', 1)
             ->where('kiemduyet', 1)
             ->orderBy('created_at', 'desc')
-            ->paginate(20);
+            ->paginate(9);
         }
         else
         {
@@ -141,7 +206,7 @@ class HomeController extends Controller
             ->where('kiemduyet', 1)
             ->where('diadiem_id', $diadiem->id)
             ->orderBy('created_at', 'desc')
-            ->paginate(20);
+            ->paginate(9);
         }
         return view('frontend.baiviet', compact('title', 'baiviet'));
     }
@@ -187,7 +252,21 @@ class HomeController extends Controller
 
     public function getLienHe()
     {
+        $user = User::all();   
+        //$chude = ChuDe::all();     
         return view('frontend.lienhe');
+    }
+
+    public function postLienHe(Request $request)
+    {
+        $orm = new LienHe();
+        $orm->hoten = $request->hoten;
+        $orm->email = $request->email;
+        $orm->dienthoai = $request->dienthoai;
+        $orm->chude = $request->chude;
+        $orm->noidung = $request->noidung;
+        $orm->save();
+        return redirect()->route('frontend.home');
     }
 
     // Trang đăng ký dành cho khách hàng

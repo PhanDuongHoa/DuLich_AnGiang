@@ -30,6 +30,19 @@
                 <div class="invalid-feedback"><strong>{{ $message }}</strong></div>
             @enderror
                 </div>
+                <!-- Đối tác -->
+                <div class="mb-3">
+                <label class="form-label" for="doitac_id">Đối tác</label>
+                <select class="form-select @error('doitac_id') is-invalid @enderror" id="doitac_id" name="doitac_id">
+                <option value="">-- Chọn (Có thể không chọn) --</option>
+            @foreach($doitac as $value)
+                <option value="{{ $value->id }}">{{ $value->tendoitac }}</option>
+            @endforeach
+                </select>
+            @error('doitac_id')
+                <div class="invalid-feedback"><strong>{{ $message }}</strong></div>
+            @enderror
+                </div>
                 <div class="mb-3">
                 <label class="form-label" for="tieude">Tiêu đề</label>
                 <input type="text" class="form-control @error('tieude') is-invalid @enderror" id="tieude" name="tieude" value="{{ old('tieude') }}" required />@error('tieude')

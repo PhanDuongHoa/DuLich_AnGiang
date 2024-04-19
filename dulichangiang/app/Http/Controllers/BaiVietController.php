@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\ChuDe;
 use App\Models\BaiViet;
 use App\Models\DiaDiem;
+use App\Models\DoiTac;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
@@ -14,14 +15,18 @@ class BaiVietController extends Controller
     public function getDanhSach()
     {
         $baiviet = BaiViet::orderBy('created_at', 'desc')->get();
+        $baiviet = BaiViet::paginate(10);
         return view('admin.baiviet.danhsach', compact('baiviet'));
     }
+    
     public function getThem()
     {
         $chude = ChuDe::all();
         $diadiem = DiaDiem::all();
-        return view('admin.baiviet.them', compact('chude', 'diadiem'));
+        $doitac = DoiTac::all();
+        return view('admin.baiviet.them', compact('chude', 'diadiem', 'doitac'));
     }
+
     public function postThem(Request $request)
     {
         // Kiểm tra
@@ -33,6 +38,7 @@ class BaiVietController extends Controller
             ]);$orm = new BaiViet();
             $orm->chude_id = $request->chude_id;
             $orm->diadiem_id = $request->diadiem_id;
+            $orm->doitac_id = $request->doitac_id;
             $orm->user_id = Auth::user()->id;
             $orm->tieude = $request->tieude;
             $orm->tieude_slug = Str::slug($request->tieude, '-');
@@ -46,8 +52,9 @@ class BaiVietController extends Controller
     {
         $chude = ChuDe::all();
         $diadiem = DiaDiem::all();
+        $doitac = DoiTac::all();
         $baiviet = BaiViet::find($id);
-        return view('admin.baiviet.sua', compact('chude', 'diadiem', 'baiviet'));
+        return view('admin.baiviet.sua', compact('chude', 'diadiem', 'doitac','baiviet'));
     }
     public function postSua(Request $request, $id)
     {
@@ -62,6 +69,7 @@ class BaiVietController extends Controller
         $orm = BaiViet::find($id);
         $orm->chude_id = $request->chude_id;
         $orm->diadiem_id = $request->diadiem_id;
+        $orm->doitac_id = $request->doitac_id;
         $orm->tieude = $request->tieude;
         $orm->tieude_slug = Str::slug($request->tieude, '-');
         $orm->tomtat = $request->tomtat;

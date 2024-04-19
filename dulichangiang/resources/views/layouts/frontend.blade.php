@@ -30,6 +30,8 @@
 	<link rel="stylesheet" media="screen" href="{{ asset('public/vendor/drift-zoom/drift-basic.min.css') }}" />
 	<link rel="stylesheet" media="screen" href="{{ asset('public/vendor/lightgallery/lightgallery-bundle.min.css') }}" />
 	<link rel="stylesheet" media="screen" href="{{ asset('public/css/theme.min.css') }}" />
+	<!-- CSS -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.min.css" />
 </head>
 
 <body class="handheld-toolbar-enabled">
@@ -49,7 +51,12 @@
 							<input name="tieude" class="form-control rounded-end pe-5" type="text" placeholder="Tìm kiếm" />
 							<button type="submit" class="btn btn-primary"><i class="ci-search ci-dark position-absolute top-50 end-0 translate-middle-y text-muted fs-base me-3"></i></button>
 						</form>
-
+						<a class="navbar-brand d-none d-sm-block flex-shrink-0" href="#">
+							<img src="{{ asset('public/img/viet-nam-logo.png') }}" width="30" />
+						</a>
+						<a class="navbar-brand d-none d-sm-block flex-shrink-0" href="#">
+							<img src="{{ asset('public/img/logo-england.png') }}" width="30" />
+						</a>
 						<div class="navbar-toolbar d-flex flex-shrink-0 align-items-center">
 							<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
 								<span class="navbar-toggler-icon"></span>
@@ -87,8 +94,13 @@
 								</li>
 							</ul>
 							<ul class="navbar-nav">
+								<li class="nav-item">
+									<a class="nav-link" href="{{ route('frontend.baiviet') }}">
+										<i class="bi bi-newspaper me-2"></i>Bài viết
+									</a>
+								</li>
 								<li class="nav-item dropdown">
-									<a class="nav-link dropdown-toggle" href="{{ route('frontend.baiviet.chude', ['tenchude_slug' => 'tam-linh']) }}" data-bs-toggle="dropdown" data-bs-auto-close="outside"><i class="ci-globe me-2"></i>Tin tức</a>
+									<a class="nav-link dropdown-toggle" href="{{ route('frontend.baiviet.chude', ['tenchude_slug' => 'tam-linh']) }}" data-bs-toggle="dropdown" data-bs-auto-close="outside"><i class="ci-globe me-2"></i>Chủ đề</a>
 									<ul class="dropdown-menu">
 										<li><a class="dropdown-item" href="{{ route('frontend.baiviet.chude', ['tenchude_slug' => 'tam-linh']) }}">Tâm linh</a></li>
 										<li><a class="dropdown-item" href="{{ route('frontend.baiviet.chude', ['tenchude_slug' => 'am-thuc']) }}">Ẩm thực</a></li>
@@ -110,6 +122,13 @@
 										<li><a class="dropdown-item" href="{{ route('frontend.baiviet.diadiem', ['tendiadiem_slug' => 'tan-chau']) }}">Tân Châu</a></li>
 										<li><a class="dropdown-item" href="{{ route('frontend.baiviet.diadiem', ['tendiadiem_slug' => 'thoai-son']) }}">Thoại Sơn</a></li>
 										<li><a class="dropdown-item" href="{{ route('frontend.baiviet.diadiem', ['tendiadiem_slug' => 'phu-tan']) }}">Phú Tân</a></li>
+									</ul>
+								</li>
+								<li class="nav-item dropdown">
+									<a class="nav-link dropdown-toggle" href="{{ route('frontend.baiviet.doitac', ['tendoitac_slug' => 'nu-cuoi-me-kong']) }}" data-bs-toggle="dropdown" data-bs-auto-close="outside"><i class="ci-globe me-2"></i>Tham khảo tour du lịch</a>
+									<ul class="dropdown-menu">
+										<li><a class="dropdown-item" href="{{ route('frontend.baiviet.doitac', ['tendoitac_slug' => 'nu-cuoi-mekong']) }}">Nụ Cười Mê Kông</a></li>
+										<li><a class="dropdown-item" href="{{ route('frontend.baiviet.doitac', ['tendoitac_slug' => 'tham-hiem-mekong']) }}">Thám Hiểm MeKong</a></li>
 									</ul>
 								</li>
 

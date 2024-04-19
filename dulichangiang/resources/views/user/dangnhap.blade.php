@@ -15,7 +15,7 @@
                                 <a class="btn-social bs-google me-2 mb-2" href="{{ route('google.login') }}" data-bs-toggle="tooltip" title="Đăng nhập với Google">
                                     <i class="ci-google"></i>
                                 </a>
-                                <a class="btn-social bs-facebook me-2 mb-2" href="#" data-bs-toggle="tooltip" title="Đăng nhập với Facebook">
+                                <a class="btn-social bs-facebook me-2 mb-2" href="{{ route('facebook.login') }}" data-bs-toggle="tooltip" title="Đăng nhập với Facebook">
                                     <i class="ci-facebook"></i>
                                 </a>
                                 <a class="btn-social bs-twitter me-2 mb-2" href="#" data-bs-toggle="tooltip" title="Đăng nhập với Twitter">

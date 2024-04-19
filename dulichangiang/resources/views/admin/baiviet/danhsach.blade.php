@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-<div class="card">
+<div class="card mb-4">
 	<div class="card-header">Bài viết</div>
 	<div class="card-body table-responsive">
 		<p><a href="{{ route('admin.baiviet.them') }}" class="btn btn-primary"><i class="bi bi-plus"></i> Thêm mới</a></p>
@@ -58,8 +58,10 @@
 						</td>
 					</tr>
 				@endforeach
+					{{ $baiviet -> links() }}
 			</tbody>
 		</table>
+		{{ $baiviet -> links() }}
 	</div>
 </div>
 @endsection

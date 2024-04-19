@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use App\Exports\LienHeExport;
-//use Maatwebsite\Excel\Facades\Excel;
+use Maatwebsite\Excel\Facades\Excel;
 
 class LienHeController extends Controller
 {
@@ -22,8 +22,8 @@ class LienHeController extends Controller
         return view('admin.lienhe.danhsach', compact('lienhe'));
     }  
     
-    // public function getXuat()
-    // {
-    //     return Excel::download(new LienHeExport,'lienhe.xlsx');
-    // }
+    public function getXuat()
+    {
+        return Excel::download(new LienHeExport,'lienhe.xlsx');
+    }
 }
