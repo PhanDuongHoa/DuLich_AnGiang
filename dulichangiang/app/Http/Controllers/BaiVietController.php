@@ -35,18 +35,20 @@ class BaiVietController extends Controller
             'diadiem_id' => ['required', 'integer'],
             'tieude' => ['required', 'string', 'max:300', 'unique:baiviet'],
             'noidung' => ['required', 'string'],
-            ]);$orm = new BaiViet();
-            $orm->chude_id = $request->chude_id;
-            $orm->diadiem_id = $request->diadiem_id;
-            $orm->doitac_id = $request->doitac_id;
-            $orm->user_id = Auth::user()->id;
-            $orm->tieude = $request->tieude;
-            $orm->tieude_slug = Str::slug($request->tieude, '-');
-            if(!empty($request->tomtat)) $orm->tomtat = $request->tomtat;
-            $orm->noidung = $request->noidung;
-            $orm->save();
-            // Sau khi thêm thành công thì tự động chuyển về trang danh sách
-            return redirect()->route('admin.baiviet');
+            ]);
+            
+        $orm = new BaiViet();
+        $orm->chude_id = $request->chude_id;
+        $orm->diadiem_id = $request->diadiem_id;
+        $orm->doitac_id = $request->doitac_id;
+        $orm->user_id = Auth::user()->id;
+        $orm->tieude = $request->tieude;
+        $orm->tieude_slug = Str::slug($request->tieude, '-');
+        if(!empty($request->tomtat)) $orm->tomtat = $request->tomtat;
+        $orm->noidung = $request->noidung;
+        $orm->save();
+        // Sau khi thêm thành công thì tự động chuyển về trang danh sách
+        return redirect()->route('admin.baiviet');
     }
     public function getSua($id)
     {

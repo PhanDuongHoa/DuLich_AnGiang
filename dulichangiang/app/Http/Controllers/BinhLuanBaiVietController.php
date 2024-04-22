@@ -64,13 +64,28 @@ class BinhLuanBaiVietController extends Controller
         return redirect()->route('frontend.baiviet.chitiet', ['tendiadiem_slug' => $binhluanbaiviet->baiviet->tieude, 'tenchude_slug' => $binhluanbaiviet->baiviet->chude->tenchude_slug, 'tieude_slug' => $binhluanbaiviet->baiviet->tieude_slug . '-' . $binhluanbaiviet->baiviet->id . '.html'])->with('success', 'Bình luận đã được cập nhật thành công.');
     }
 
-    public function getXoa($id)
-    {
-        $orm = BinhLuanBaiViet::find($id);
-        $orm->delete();
-        // Sau khi xóa thành công thì tự động chuyển về trang danh sách
-        return redirect()->route('admin.binhluanbaiviet');
+    public function getXoa($id) {
+        $binhluanbaiviet = BinhLuanBaiViet::findOrFail($id);
+
+        // Kiểm tra xem người dùng hiện tại có quyền xóa bình luận không
+        if(Auth::check() && Auth::user()->id == $binhluanbaiviet->user_id) 
+        {
+            $binhluanbaiviet->delete();
+            return redirect()->back()->with('success', 'Bình luận đã được xóa thành công.');
+        } 
+        else 
+        {
+            return redirect()->back()->with('error', 'Bạn không có quyền xóa bình luận này.');
+        }
     }
+
+    // public function getXoa($id)
+    // {
+    //     $orm = BinhLuanBaiViet::find($id);
+    //     $orm->delete();
+    //     // Sau khi xóa thành công thì tự động chuyển về trang danh sách
+    //     return redirect()->route('admin.binhluanbaiviet');
+    // }
     public function getKiemDuyet($id)
     {
         $orm = BinhLuanBaiViet::find($id);
